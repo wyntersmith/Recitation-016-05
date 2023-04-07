@@ -18,6 +18,9 @@ Party Founders
 Party Finder
 
 # Application Description
+The goal of our application is to bring random individuals together for shared parties. We are going to have a login and register pages that are connected to a database. With this we will also have a profile for each user allowing people to upload pictures/have previous parties on their page.
+
+On the discover page, we would like to have a map representing all of the parties going on based on geographic location. In addition, we want users to be able to post,delete, and comment on other parties. On those posts we will allow users to edit their posts with how many people can come and who is invited. In addition, we are going to add a filter so you can search for parties specifically based on location, type, theme, size of party.
 
 
 # Vision Statement
