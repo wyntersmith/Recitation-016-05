@@ -27,3 +27,6 @@ Party Finder
 Our team intends to communicate via a Discord group.
 
 # Meeting Plan
+## Team Meeting
+
+## TA Meeting
