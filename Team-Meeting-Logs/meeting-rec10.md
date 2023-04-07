@@ -28,5 +28,6 @@ Our team intends to communicate via a Discord group.
 
 # Meeting Plan
 ## Team Meeting
-
+Tuesdays @ 4:30 P.M.
 ## TA Meeting
+Mondays @ 2:45 P.M.
