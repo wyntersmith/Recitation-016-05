@@ -24,7 +24,7 @@ On the discover page, we would like to have a map representing all of the partie
 
 
 # Vision Statement
-
+For party goers, who run out of parties to go to, Party Finder is a communal gathering application that will revolutionize the party scene, unlike these other social media platforms we are an app that focuses solely on partying! 
 
 # Communication Plan
 Our team intends to communicate via a Discord group.
