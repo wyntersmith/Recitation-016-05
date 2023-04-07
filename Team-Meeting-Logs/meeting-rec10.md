@@ -24,6 +24,6 @@ Party Finder
 
 
 # Communication Plan
-
+Our team intends to communicate via a Discord group.
 
 # Meeting Plan
