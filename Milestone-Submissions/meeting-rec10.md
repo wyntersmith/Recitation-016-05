@@ -12,7 +12,7 @@ Party Founders
 |Hayden Schlichting |Haydebug      |Hasc5772@colorado.edu     |
 |Aidan St. Cyr      |aist9379      |aist9379@colorado.edu     |
 |Dan Medvedev       |DanielMed1620 |dame0706@colorado.edu     |
-|Ali Almutawa Jr.   |              |     |
+|Ali Almutawa Jr.   |PiCake314     |     |
 
 # Application Name
 Party Finder
