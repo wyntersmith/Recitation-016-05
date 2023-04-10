@@ -57,12 +57,6 @@ app.use(
   })
 );
 
-
-// const user = {
-//   username: undefined,
-//   password: undefined,
-// };
-
 // *****************************************************
 // <!-- Section 4 : API Routes -->
 // *****************************************************
@@ -79,6 +73,7 @@ app.get('/register', (req, res) => {
 
 app.post("/login", (req, res) => {
   const query = "select * from users where username = $1;";
+  console.log("test1");
 
   db.one(query, [req.body.username])
     .then(async function (data) {
@@ -117,12 +112,9 @@ const auth = (req, res, next) => {
   next();
 };
 
-app.use(auth); // Authentication required
-
 app.post('/register', async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   const query = "insert into users (username, password) values ($1, $2);";
-  console.log(req.body.username, hashedPassword);
 
   db.any(query, [req.body.username, hashedPassword])
   .then(function (data) {
@@ -133,6 +125,8 @@ app.post('/register', async (req, res) => {
   });
 
 });
+
+app.use(auth); // Authentication required
 
 app.get('/', (req, res) => {
   res.redirect('/discover'); //this will call the /anotherRoute route in the API
