@@ -73,7 +73,6 @@ app.get('/register', (req, res) => {
 
 app.post("/login", (req, res) => {
   const query = "select * from users where username = $1;";
-  console.log("test1");
 
   db.one(query, [req.body.username])
     .then(async function (data) {
