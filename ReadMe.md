@@ -8,7 +8,7 @@ On the discover page, we would like to have a map representing all of the partie
 ## Team 016-05
 |Name               |Github        |Email                     |
 |-------------------|------------- |--------------------------|
-|Zoie Nuno          |wyntersmith   |zonu9746@colorado.edu     |
+|Zoie Nuño          |wyntersmith   |zonu9746@colorado.edu     |
 |Nolan Lee          |NolanLee100101|nole5800@colorado.edu     |
 |Hayden Schlichting |Haydebug      |Hasc5772@colorado.edu     |
 |Aidan St. Cyr      |aist9379      |aist9379@colorado.edu     |
