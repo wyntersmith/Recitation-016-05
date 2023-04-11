@@ -1,4 +1,4 @@
-CREATE DATABASE party_finder;
+CREATE DATABASE IF NOT EXISTS party_finder;
 USE party_finder;
 
 DROP TABLE IF EXISTS users CASCADE;
@@ -14,17 +14,17 @@ CREATE TABLE IF NOT EXISTS users (
 DROP TABLE IF EXISTS party_info CASCADE;
 CREATE TABLE IF NOT EXISTS party_info (
 	party_id SERIAL PRIMARY KEY NOT NULL,
-    host_user_id SERIAL NOT NULL,
+    host_user_id BIGINT UNSIGNED NOT NULL,
     location VARCHAR(100) NOT NULL,
-    FOREIGN KEY(user_id)
+    FOREIGN KEY(host_user_id)
 		REFERENCES users(user_id)
 );
 
 DROP TABLE IF EXISTS user_parties CASCADE;
 CREATE TABLE IF NOT EXISTS user_parties (
 	user_id SERIAL PRIMARY KEY NOT NULL,
-    parties_attended SERIAL,
-    parties_hosted SERIAL,
+    parties_attended BIGINT UNSIGNED,
+    parties_hosted BIGINT UNSIGNED,
     FOREIGN KEY (user_id)
 		REFERENCES users(user_id)
 );
