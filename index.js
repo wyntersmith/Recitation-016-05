@@ -127,19 +127,34 @@ app.post('/register', async (req, res) => {
 
 app.use(auth); // Authentication required
 
+// Home case - redirect to discover
 app.get('/', (req, res) => {
-  res.redirect('/discover'); //this will call the /anotherRoute route in the API
+  res.redirect('/discover'); 
 });
 
+
+app.get('/profile', (req, res) => {
+  res.render('pages/profile');
+});
 
 app.get('/discover', (req, res) => {
     res.render('pages/discover');
 });
 
+
+app.get("/party", (req, res) => {
+  req.session.destroy();
+  res.render("pages/party");
+  });
+
 app.get("/logout", (req, res) => {
   req.session.destroy();
   res.render("pages/login");
 });
+
+
+
+
 
 
 
