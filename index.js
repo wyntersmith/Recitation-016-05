@@ -138,7 +138,8 @@ app.get('/profile', (req, res) => {
 });
 
 app.get('/discover', (req, res) => {
-  const query = "select * from party_info where";
+  console.log("Discover page");
+  const query = "select * from party_info;";
 
   db.any(query)
   .then(function (party_data) {
