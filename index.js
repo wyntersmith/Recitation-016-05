@@ -138,12 +138,24 @@ app.get('/profile', (req, res) => {
 });
 
 app.get('/discover', (req, res) => {
+  const query = "select * from party_info where";
+
+  db.any(query)
+  .then(function (party_data) {
+    console.log(party_data); 
+    res.render('pages/discover', {
+      data: party_data,
+    });
+  })
+  .catch(function (err) {
+    console.log(err);
     res.render('pages/discover');
+  });
+
 });
 
 
 app.get("/party", (req, res) => {
-  //req.session.destroy();
   res.render("pages/party");
   });
 
