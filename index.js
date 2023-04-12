@@ -143,7 +143,7 @@ app.get('/discover', (req, res) => {
 
 
 app.get("/party", (req, res) => {
-  req.session.destroy();
+  //req.session.destroy();
   res.render("pages/party");
   });
 
