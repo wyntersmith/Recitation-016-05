@@ -12,9 +12,11 @@ DROP TABLE IF EXISTS party_info CASCADE;
 CREATE TABLE IF NOT EXISTS party_info (
 	party_id SERIAL PRIMARY KEY NOT NULL,
   host_user_id BIGINT NOT NULL,
+  party_name VARCHAR(50),
   location VARCHAR(100) NOT NULL,
   party_date DATE NOT NULL,
   start_time TIME(4),
+  party_description VARCHAR(144),
   FOREIGN KEY(host_user_id)
 	REFERENCES users(user_id)
 );

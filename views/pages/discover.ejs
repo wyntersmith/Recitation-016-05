@@ -20,7 +20,7 @@
           
           <% for (let i = 0; i < data.length; i++) { %>
               <tr>
-                  <td><%= data[i].host_user_id %></td>
+                  <td><%= data[i].party_name %></td>
                   <td><%= data[i].location %></td>
                   <% var date = new Date(data[i].party_date); %>
                   <td><%=  date.toLocaleDateString()  %></td>
