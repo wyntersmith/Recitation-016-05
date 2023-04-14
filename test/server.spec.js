@@ -25,4 +25,17 @@ describe('Server!', () => {
 
   // ===========================================================================
   // TO-DO: Part A Login unit test case
+  // ===========================================================================
+  it('Returns the login message', done => {
+    chai
+      .request(server)
+      .get('/login')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.status).to.equals('success');
+        assert.strictEqual(res.body.message, 'Login successful!');
+        done();
+      });
+  }
+  );
 });

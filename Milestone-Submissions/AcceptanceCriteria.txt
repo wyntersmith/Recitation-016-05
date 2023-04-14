@@ -18,11 +18,10 @@ Information for login should be stored "users" table within "partyfinder_db" dat
 Test environment: Running docker on a local machine at the localhost:3000/login
 
 A user should be able to create a new party if they fill out the mandatory fields in the party creation form:
-
-Party name
-Date and time
-Location
-Description
+-Party name
+-Date and time
+-Location
+-Description
 If any of these fields are missing or invalid, the party creation attempt should fail. The user must be logged in to create a party.
 Information from this form should be stored in the "parties" table within the "partyfinder_db" database, and the user ID should be linked to the created party to identify the party organizer.
 
