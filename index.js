@@ -57,12 +57,6 @@ app.use(
   })
 );
 
-const user = {
-  username: undefined,
-  firstName: undefined,
-  lastName: undefined,
-  email: undefined,
-};
 
 // *****************************************************
 // <!-- Section 4 : API Routes -->
@@ -88,12 +82,12 @@ app.post("/login", (req, res) => {
         const match = await bcrypt.compare(req.body.password, data.password);
         if(match){
 
-          user.username = username;
-          user.firstName = data.firstName;
-          user.lastName = data.lastName;
-          user.email=data.email;
-
-          req.session.user = data;
+          req.session.user = {
+            username,
+            firstName: data.firstname,
+            lastName: data.lastname,
+            email: data.email,
+          };
           req.session.save();
           res.redirect("/discover");
         }
@@ -150,8 +144,8 @@ app.get('/', (req, res) => {
 app.get('/profile', (req, res) => {
   res.render('pages/profile',{
     username: req.session.user.username,
-    firstName: req.session.user.firstname,
-    lastName: req.session.user.lastname,
+    firstName: req.session.user.firstName,
+    lastName: req.session.user.lastName,
     email: req.session.user.email,
   });
 
