@@ -83,6 +83,7 @@ app.post("/login", (req, res) => {
         if(match){
 
           req.session.user = {
+            user_id: data.user_id,
             username,
             firstName: data.firstname,
             lastName: data.lastname,
@@ -142,6 +143,11 @@ app.get('/', (req, res) => {
 
 
 app.get('/profile', (req, res) => {
+  const query = "select * from user_parties where user_id = req.session.user.user_id";
+  //const 
+
+  //db.one(query,[])
+
   res.render('pages/profile',{
     username: req.session.user.username,
     firstName: req.session.user.firstName,
