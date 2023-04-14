@@ -86,15 +86,18 @@ app.post("/login", (req, res) => {
           req.session.user = data;
           req.session.save();
           res.redirect("/discover");
+          res.response.status(200).send('Login successful!');
         }
         else{
-          res.redirect("/discover");
+          res.redirect("/login");
+          res.response.status(401).send("Incorrect password");
         }
       }
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/discover");
+      res.redirect("/login");
+      res.response.status(401).send("Incorrect username");
     });
 });
 
