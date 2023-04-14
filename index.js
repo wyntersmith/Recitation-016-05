@@ -63,6 +63,10 @@ app.use(
 
 // TODO - Include your API routes here
   
+app.get('/welcome', (req, res) => {
+  res.json({status: 'success', message: 'Welcome!'});
+});
+
 app.get('/login', (req, res) => {
   res.render('pages/login');
 });
@@ -84,22 +88,13 @@ app.post("/login", (req, res) => {
           res.redirect("/discover");
         }
         else{
-          res.render("/login", {
-            error: true,
-            message: "Incorrect username or password."
-          })
+          res.redirect("/discover");
         }
-      }
-      else{
-        res.render("/login", {
-          error: true,
-          message: "User does not exist"
-        })
       }
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/login");
+      res.redirect("/discover");
     });
 });
 
