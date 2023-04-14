@@ -1,0 +1,11 @@
+User Acceptance Testing
+
+A user should be able to make an account if it types in the mandatory fields:
+- First
+- Lastname
+- Username
+- Password
+- Email
+If the user is missing any of these fields, the registration attempt should fail.
+Information from this form should be stored in "users" table within "partyfinder_db" database
+Test environment: Running docker on a local machine at the localhost:3000/
