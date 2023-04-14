@@ -150,8 +150,8 @@ app.get('/', (req, res) => {
 app.get('/profile', (req, res) => {
   res.render('pages/profile',{
     username: req.session.user.username,
-    firstName: req.session.user.firstName,
-    lastName: req.session.user.lastName,
+    firstName: req.session.user.firstname,
+    lastName: req.session.user.lastname,
     email: req.session.user.email,
   });
 
@@ -163,7 +163,6 @@ app.get('/discover', (req, res) => {
 
 
 app.get("/party", (req, res) => {
-  req.session.destroy();
   res.render("pages/party");
   });
 
