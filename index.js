@@ -84,22 +84,13 @@ app.post("/login", (req, res) => {
           res.redirect("/discover");
         }
         else{
-          res.render("/login", {
-            error: true,
-            message: "Incorrect username or password."
-          })
+          res.redirect("/discover");
         }
-      }
-      else{
-        res.render("/login", {
-          error: true,
-          message: "User does not exist"
-        })
       }
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/login");
+      res.redirect("/discover");
     });
 });
 
