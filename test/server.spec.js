@@ -9,7 +9,7 @@ chai.should();
 chai.use(chaiHttp);
 const {assert, expect} = chai;
 
-describe('Server!', () => {
+describe('Server test cases', () => {
   // Sample test case given to test / endpoint.
   it('Returns the default welcome message', done => {
     chai
