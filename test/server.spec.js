@@ -29,7 +29,7 @@ describe('Server!', () => {
   it('Returns the login message', done => {
     chai
       .request(server)
-      .get('/login')
+      .post('/login')
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body.status).to.equals('success');

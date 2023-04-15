@@ -85,16 +85,16 @@ app.post("/login", (req, res) => {
         if(match){
           req.session.user = data;
           req.session.save();
-          res.redirect("/discover");
+          res.redirect("/profile");
         }
         else{
-          res.redirect("/discover");
+          res.redirect("/profile");
         }
       }
     })
     .catch((err) => {
       console.log(err);
-      res.redirect("/discover");
+      res.redirect("/profile");
     });
 });
 
@@ -159,11 +159,6 @@ app.get("/logout", (req, res) => {
   req.session.destroy();
   res.render("pages/login");
 });
-
-
-
-
-
 
 
 // *****************************************************
