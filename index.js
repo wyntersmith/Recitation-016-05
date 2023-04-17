@@ -108,9 +108,9 @@ const auth = (req, res, next) => {
 
 app.post('/register', async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
-  const query = "insert into users (username,email,firstname,lastname, password) values ($1,$2,$3,$4,$5);";
+  const query = "insert into users (username,email,firstName,lastName, password) values ($1,$2,$3,$4,$5);";
 
-  db.any(query,[req.body.username,req.body.email,req.body.firstname,req.body.lastname, hashedPassword])
+  db.any(query,[req.body.username,req.body.email,req.body.firstName,req.body.lastName, hashedPassword])
   .then(function (data) {
     res.redirect('/login');
   })
