@@ -57,6 +57,7 @@ app.use(
   })
 );
 
+
 // *****************************************************
 // <!-- Section 4 : API Routes -->
 // *****************************************************
@@ -76,14 +77,22 @@ app.get('/register', (req, res) => {
 });
 
 app.post("/login", (req, res) => {
+  const username = req.body.username;
   const query = "select * from users where username = $1;";
 
-  db.one(query, [req.body.username])
+  db.one(query, [username])
     .then(async function (data) {
       if(data) {
         const match = await bcrypt.compare(req.body.password, data.password);
         if(match){
-          req.session.user = data;
+
+          req.session.user = {
+            user_id: data.user_id,
+            username,
+            firstName: data.firstname,
+            lastName: data.lastname,
+            email: data.email,
+          };
           req.session.save();
           res.redirect("/profile");
         }
@@ -129,7 +138,18 @@ app.get('/', (req, res) => {
 
 
 app.get('/profile', (req, res) => {
-  res.render('pages/profile');
+  const query = "select * from user_parties where user_id = req.session.user.user_id";
+  //const 
+
+  //db.one(query,[])
+
+  res.render('pages/profile',{
+    username: req.session.user.username,
+    firstName: req.session.user.firstName,
+    lastName: req.session.user.lastName,
+    email: req.session.user.email,
+  });
+
 });
 
 app.get('/discover', (req, res) => {
