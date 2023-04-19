@@ -3,41 +3,75 @@
 
 <main style="background: #6a11cb;">
 
-  <div class="container"> 
-    <!-- PROFILE PAGE HTML CODE STARTS HERE -->
-    <div style="text-align:center;">
-      <div class="card mb-3" style="max-width: 30rem;">
-        <div class="row no-gutters">
-          <div class="col-md-4">
-            <img src="https://via.placeholder.com/150" alt="Profile Picture" class="img-fluid rounded-circle">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title" style="font-weight: bolder;">Username</h5>
-              <p class="card-text">First Name: </p>
-              <p class="card-text">Last Name: </p>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="container"> 
+      <!-- THE REST OF YOUR HTML CODE GOES HERE -->
+  
+      <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+      
+                  <div class="mb-md-5 mt-md-4 pb-5">
+      
+                    <h2 class="fw-bold mb-2 text-uppercase">Profile</h2>
+                    <p class="text-white-50 mb-5">
+                      <%= username %>
+                    </p>
+                    <table style="height: 250px; width: 100%;">
+                      <tr>
+                        <th style="text-align: left;">
+                          First Name
+                        </th>
+                        <td>
+                          <%= firstName %>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th style="text-align: left;">
+                          Last Name
+                        </th>
+                        <td> 
+                          <%= lastName %>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th style="text-align: left;">
+                          Email
+                        </th>
+                        <td>
+                          <%= email %>
+                        </td>
+                      </tr>
 
-      <div class="card mb-3" style="max-width: 30rem;">
-        <div class="row no-gutters">
-          <div class="col-md-4">
-            <img src="https://via.placeholder.com/150" alt="Parties Attended" class="img-fluid rounded-circle">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title" id="parties-attended">Parties Attended</h5>
-              <p class="card-text">3</p>
+                      <tr>
+                        <th style="text-align: left;">
+                          Parties Attended
+                        </th>
+                        <td>
+                          <!--<%= //parties_attended%>-->
+                        </td>
+                      </tr>
+                      <tr>
+                        <th style="text-align: left;">
+                          Parties Hosted
+                        </th>
+                        <td>
+                          <!--<%= //parties_hosted %>-->
+                        </td>
+                      </tr>
+                    </table>
+
+      
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
-    <!-- PROFILE PAGE HTML CODE ENDS HERE -->    
-  </div>
-</main>
+  </main>
 
 <%- include ('../partials/footer') %>
 
