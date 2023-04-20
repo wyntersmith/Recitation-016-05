@@ -63,9 +63,9 @@ app.use(
 // *****************************************************
 
 // TODO - Include your API routes here
-  
+
 app.get('/welcome', (req, res) => {
-  res.json({status: 'success', message: 'Welcome!'});
+  res.json({ status: 'success', message: 'Welcome!' });
 });
 
 app.get('/login', (req, res) => {
@@ -82,9 +82,9 @@ app.post("/login", (req, res) => {
 
   db.one(query, [username])
     .then(async function (data) {
-      if(data) {
+      if (data) {
         const match = await bcrypt.compare(req.body.password, data.password);
-        if(match){
+        if (match) {
 
           req.session.user = {
             user_id: data.user_id,
@@ -96,7 +96,7 @@ app.post("/login", (req, res) => {
           req.session.save();
           res.redirect("/profile");
         }
-        else{
+        else {
           res.redirect("/profile");
         }
       }
@@ -119,13 +119,13 @@ app.post('/register', async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   const query = "insert into users (username,email,firstName,lastName, password) values ($1,$2,$3,$4,$5);";
 
-  db.any(query,[req.body.username,req.body.email,req.body.firstName,req.body.lastName, hashedPassword])
-  .then(function (data) {
-    res.redirect('/login');
-  })
-  .catch(function (err) {
-    res.redirect('/register');
-  });
+  db.any(query, [req.body.username, req.body.email, req.body.firstName, req.body.lastName, hashedPassword])
+    .then(function (data) {
+      res.redirect('/login');
+    })
+    .catch(function (err) {
+      res.redirect('/register');
+    });
 
 });
 
@@ -133,47 +133,75 @@ app.use(auth); // Authentication required
 
 // Home case - redirect to discover
 app.get('/', (req, res) => {
-  res.redirect('/discover'); 
+  res.redirect('/discover');
 });
 
 
-app.get('/profile', (req, res) => {
-  const query = "select * from user_parties where user_id = req.session.user.user_id";
-  //const 
+app.get('/profile', async (req, res) => {
+  const query = "select * from user_parties where user_id = $1";
 
-  //db.one(query,[])
 
-  res.render('pages/profile',{
+  let parties_data;
+  try {
+    parties_data = await db.oneOrNone(query, [req.session.user.user_id]);
+    if (parties_data == null) {
+      parties_data = {
+        parties_attended: 0,
+        parties_hosted: 0
+      }
+    }
+  } catch (err) {
+    console.log(err);
+    res.render('pages/error');
+    return;
+
+  }
+  res.render('pages/profile', {
     username: req.session.user.username,
     firstName: req.session.user.firstName,
     lastName: req.session.user.lastName,
     email: req.session.user.email,
+    parties_attended: parties_data.parties_attended,
+    parties_hosted: parties_data.parties_hosted,
   });
+
 
 });
 
-app.get('/discover', (req, res) => {
+app.get('/discover', async (req, res) => {
   console.log("Discover page");
   const query = "select * from party_info;";
-
-  db.any(query)
-  .then(function (party_data) {
-    console.log(party_data); 
+  try {
+    party_data = await db.any(query)
+    console.log(party_data);
     res.render('pages/discover', {
       data: party_data,
     });
-  })
-  .catch(function (err) {
+  } catch (err) {
     console.log(err);
     res.render('pages/discover');
-  });
+  }
+
+
+
+  // db.any(query)
+  // .then(function (party_data) {
+  //   console.log(party_data); 
+  //   res.render('pages/discover', {
+  //     data: party_data,
+  //   });
+  // })
+  // .catch(function (err) {
+  //   console.log(err);
+  //   res.render('pages/discover');
+  // });
 
 });
 
 
 app.get("/party", (req, res) => {
   res.render("pages/party");
-  });
+});
 
 app.get("/logout", (req, res) => {
   req.session.destroy();
