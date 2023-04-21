@@ -148,7 +148,7 @@ app.post('/register', async (req, res) => {
   db.any(query1, [req.body.username, req.body.email])
   .then(function (data) {
     if (data.length) {
-      res.redirect('/register');
+      res.render('pages/register', {message: "Username or Email already in use"});
     }
     else {
       db.any(query, [req.body.username, req.body.email, req.body.firstName, req.body.lastName, hashedPassword])
