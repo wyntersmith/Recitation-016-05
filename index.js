@@ -76,6 +76,10 @@ app.get('/api/parties', async (req, res) => {
   }
 });
 
+app.get('/api/partyHostInfo', async (req, res) => {
+  
+})
+
 // Setup CSS
 app.use(express.static('public'));
 
