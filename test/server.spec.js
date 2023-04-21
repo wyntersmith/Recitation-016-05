@@ -52,6 +52,7 @@ describe('Server test cases', () => {
   // to run tests: docker-compose run web npm run testandrun
   // server never runs if tests are failing so separated them
 
+  // LOGIN PAGE
   it('Test login with valid user redirects to profile', done => {
     chai
       .request(server)
@@ -85,6 +86,8 @@ describe('Server test cases', () => {
       });
   });
 
+
+  // PROFILE PAGE
   it('Tests if profile loads successfully', done => {
     chai
     .request(server)
@@ -95,6 +98,8 @@ describe('Server test cases', () => {
     })
   });
 
+
+  // DISCOVER PAGE
   it('Tests if discover loads successfully', done => {
     chai
     .request(server)
@@ -105,16 +110,44 @@ describe('Server test cases', () => {
     })
   });
 
-  // it('Returns the default welcome message', done => {
+
+  //REGISTER PAGE
+  it('Test valid register with redirect to login', done => {
+    chai
+      .request(server)
+      .post('/register')
+      .set('content-type', 'application/x-www-form-urlencoded')
+      .send({
+        firstName:'Ada',
+        lastName: 'Lovelace',
+        username: 'adalovelace',
+        email: 'ada@lovelace',  
+        password: 'te$t1nG',
+      })
+      .redirects(0)
+      .end((err, res) => {
+        expect(res).to.redirect;
+        expect(res.headers).to.have.property('location');
+        expect(res.headers.location).to.include('/login');
+        done();
+      });
+  });
+
+  // it('Test register with invalid info returns 403', done => {
   //   chai
   //     .request(server)
-  //     .get('/discover')
+  //     .post('/register')
+  //     .set('content-type', 'application/x-www-form-urlencoded')
+  //     .send({
+  //       firstName: '',
+  //       lastName: '',
+  //       username: '',
+  //       email: '', 
+  //       password: '',
+  //     })
   //     .end((err, res) => {
-  //       expect(res).to.have.status(200);
-  //       expect(res.body.status).to.equals('success');
-  //       assert.strictEqual(res.body.message, 'Welcome!');
+  //       expect(res).to.have.status(403)
   //       done();
   //     });
   // });
-
 });
