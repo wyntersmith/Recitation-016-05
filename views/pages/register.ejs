@@ -2,69 +2,88 @@
 
 <main style="background: #6a11cb;">
   <div class="container">
+    <div class="row">
+      <div class="col-lg-6 d-flex align-items-center justify-content-center">
+        <div class="text-white">
+          <h1 class="display-3 font-weight-bold">Hey there!</h1>
+          <h2 class="display-4">Welcome to the party!</h2>
+        </div>
+      </div>
 
+      <div class="col-lg-6">
+        <form action="/register" method="POST">
+          <section class="vh-100 gradient-custom">
+            <div class="container py-5 h-100">
+              <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-12 col-xl-10">
+                  <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
 
-    <form action="/register" method="POST">
-      <section class="vh-100 gradient-custom">
-        <div class="container py-5 h-100">
-          <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-              <div class="card bg-dark text-white" style="border-radius: 1rem;">
-                <div class="card-body p-5 text-center">
-      
-                  <div class="mb-md-5 mt-md-4 pb-5">
-      
-                    <h2 class="fw-bold mb-2 text-uppercase">Register</h2>
-                    <p class="text-white-50 mb-5">Please fill out the following information:</p>
-      
-                      <div class="input-group mb-3">
-                        <!-- <div class="form-outline form-white mb-4"> -->
-                          <input type="text" id="firstName" name="firstName" class="form-control form-control-lg" placeholder="First name" />
-                          <!-- <label class="form-label" for="firstNameLabel">First name</label> -->
-                        <!-- </div> -->
-                        <div class="mr-2 ml-2"></div>
-                        <!-- <div class="form-outline form-white mb-4"> -->
-                          <input type="text" id="lastName" name="lastName" class="form-control form-control-lg" placeholder="Last name" />
-                          <!-- <label class="form-label" for="lastNameLabel">Lastname</label> -->
-                        <!-- </div> -->
+                      <div class="pb-5">
+
+                        <h2 class="display-3 font-weight-bold">Join now.</h2>
+                        <p class="text-white-50 mb-5">Let's get to know you a bit first.</p>
+
+                        <div class="input-group mb-3">
+                          <input type="text" id="firstName" name="firstName" class="form-control form-control-lg" placeholder="First name" required />
+                          <div class="mr-2 ml-2"></div>
+                          <input type="text" id="lastName" name="lastName" class="form-control form-control-lg" placeholder="Last name" required />
+                        </div>
+
+                        <div class="form-outline form-white mb-4">
+                          <input type="text" id="username" name="username" class="form-control form-control-lg" placeholder="Username" required />
+                        </div>
+                        <div class="form-outline form-white mb-4">
+                          <input type="text" id="email" name="email" class="form-control form-control-lg" placeholder="Email" required />
+                        </div>
+
+                        <div class="form-outline form-white mb-4">
+                          <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Password" required />
+                        </div>
+
+                        <button class="btn btn-outline-light btn-lg px-5" type="submit">Register</button>
+
                       </div>
 
-                      <div class="form-outline form-white mb-4">
-                        <input type="text" id="username" name="username" class="form-control form-control-lg" placeholder="Username" />
-                        <!-- <label class="form-label" for="UsernameLabel">Username</label> -->
+                      <div>
+                        <p class="mb-0">Already have an account? <a href="/login" class="text-white-50 fw-bold">Log In</a>
+                        </p>
                       </div>
-                      <div class="form-outline form-white mb-4">
-                        <input type="text" id="email" name="email" class="form-control form-control-lg" placeholder="Email" />
-                        <!-- <label class="form-label" for="emailLabel">Email</label> -->
-                      </div>
-        
-                      <div class="form-outline form-white mb-4">
-                        <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Password" />
-                        <!-- <label class="form-label" for="passwordLabel">Password</label> -->
-                      </div>
-      
-                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Register</button>
-    
-          
-      
+
+                    </div>
                   </div>
-      
-                  <div>
-                    <p class="mb-0">Already have an account? <a href="/login" class="text-white-50 fw-bold">Log In</a>
-                    </p>
-                  </div>
-      
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-      </form>
-
-
-
+          </section>
+        </form>
+      </div>
+    </div>
   </div>
 </main>
+
+<script>
+  function isValidEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
+  document.querySelector("form").addEventListener("submit", function (event) {
+    const firstName = document.getElementById("firstName").value.trim();
+    const lastName = document.getElementById("lastName").value.trim();
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if (!firstName || !lastName || !username || !email || !password) {
+      event.preventDefault();
+      alert("All fields are required.");
+    } else if (!isValidEmail(email)) {
+      event.preventDefault();
+      alert("Please enter a valid email address.");
+    }
+  });
+</script>
+
 
 <%- include ('../partials/footer') %>
