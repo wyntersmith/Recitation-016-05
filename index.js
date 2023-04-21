@@ -112,7 +112,7 @@ app.post("/login", (req, res) => {
           res.redirect("/profile");
         }
         else {
-          res.status(403).render("pages/login");  //incorrect password
+          res.status(403).render("pages/login", {denied: true});  //incorrect password
         }
       }
     })
