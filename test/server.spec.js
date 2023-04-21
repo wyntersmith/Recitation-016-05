@@ -53,6 +53,7 @@ describe('Server test cases', () => {
   // server never runs if tests are failing so separated them
 
   // LOGIN PAGE
+  // LOGIN PAGE
   it('Test login with valid user redirects to profile', done => {
     chai
       .request(server)
@@ -86,7 +87,6 @@ describe('Server test cases', () => {
       });
   });
 
-
   // PROFILE PAGE
   it('Tests if profile loads successfully', done => {
     chai
@@ -97,7 +97,6 @@ describe('Server test cases', () => {
       done();
     })
   });
-
 
   // DISCOVER PAGE
   it('Tests if discover loads successfully', done => {
@@ -110,44 +109,44 @@ describe('Server test cases', () => {
     })
   });
 
+ //REGISTER PAGE
+ it('Test valid register with redirect to login', done => {
+  chai
+    .request(server)
+    .post('/register')
+    .set('content-type', 'application/x-www-form-urlencoded')
+    .send({
+      firstName:'Ada',
+      lastName: 'Lovelace',
+      username: 'adalovelace',
+      email: 'ada@lovelace',  
+      password: 'te$t1nG',
+    })
+    .redirects(0)
+    .end((err, res) => {
+      expect(res).to.redirect;
+      expect(res.headers).to.have.property('location');
+      expect(res.headers.location).to.include('/login');
+      done();
+    });
+});
 
-  //REGISTER PAGE
-  it('Test valid register with redirect to login', done => {
-    chai
-      .request(server)
-      .post('/register')
-      .set('content-type', 'application/x-www-form-urlencoded')
-      .send({
-        firstName:'Ada',
-        lastName: 'Lovelace',
-        username: 'adalovelace',
-        email: 'ada@lovelace',  
-        password: 'te$t1nG',
-      })
-      .redirects(0)
-      .end((err, res) => {
-        expect(res).to.redirect;
-        expect(res.headers).to.have.property('location');
-        expect(res.headers.location).to.include('/login');
-        done();
-      });
-  });
+// it('Test register with invalid info returns 403', done => {
+//   chai
+//     .request(server)
+//     .post('/register')
+//     .set('content-type', 'application/x-www-form-urlencoded')
+//     .send({
+//       firstName: '',
+//       lastName: '',
+//       username: '',
+//       email: '', 
+//       password: '',
+//     })
+//     .end((err, res) => {
+//       expect(res).to.have.status(403)
+//       done();
+//     });
+// });
 
-  // it('Test register with invalid info returns 403', done => {
-  //   chai
-  //     .request(server)
-  //     .post('/register')
-  //     .set('content-type', 'application/x-www-form-urlencoded')
-  //     .send({
-  //       firstName: '',
-  //       lastName: '',
-  //       username: '',
-  //       email: '', 
-  //       password: '',
-  //     })
-  //     .end((err, res) => {
-  //       expect(res).to.have.status(403)
-  //       done();
-  //     });
-  // });
 });
