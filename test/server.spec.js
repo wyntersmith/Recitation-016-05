@@ -85,16 +85,24 @@ describe('Server test cases', () => {
       });
   });
 
-  // it('Returns the profile message', done => {
-  //   chai
-  //   .request(server)
-  //   .get('/profile')
-  //   .end((err,res) => {
-  //     expect(res).to.have.status(200)
-  //     expect(res.body.status).to.equals('success');
-  //     assert.strictEqual(res.body.message, 'Successfully reached profile');
-  //   })
-  // })
+  it('Tests if profile loads successfully', done => {
+    chai
+    .request(server)
+    .get('/profile')
+    .end((err,res) => {
+      expect(res).to.have.status(200)
+      done();
+    })
+  });
 
+  it('Tests if discover loads successfully', done => {
+    chai
+    .request(server)
+    .get('/discover')
+    .end((err,res) => {
+      expect(res).to.have.status(200)
+      done();
+    })
+  });
 
 });
