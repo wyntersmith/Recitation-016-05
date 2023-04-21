@@ -1,0 +1,9 @@
+# Meeting 3
+    - need to move items in insert.sql to test file
+    - check for duplicate usernames
+    - add password confirmation
+    - edit party pages, make map smaller
+        - add party list to side
+        - add the 'add party function'
+    - add minimum password requirements
+

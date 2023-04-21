@@ -105,4 +105,16 @@ describe('Server test cases', () => {
     })
   });
 
+  // it('Returns the default welcome message', done => {
+  //   chai
+  //     .request(server)
+  //     .get('/discover')
+  //     .end((err, res) => {
+  //       expect(res).to.have.status(200);
+  //       expect(res.body.status).to.equals('success');
+  //       assert.strictEqual(res.body.message, 'Welcome!');
+  //       done();
+  //     });
+  // });
+
 });
