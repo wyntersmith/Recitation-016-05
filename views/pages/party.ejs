@@ -1,104 +1,98 @@
 <%- include ('../partials/header') %>
 <%- include ('../partials/menu') %>
 
-    <main style="background: #6a11cb;">
+<main style="background: #6a11cb;">
 
-      <body>
-        <div class="container">
-          <p>Party Page</p>
-          <div class="content">
-            
-            <div id="map"></div>
-            
-          
-        </div>
+  <body>
+    <div class="container">
+      <div class="content">
+        <div id="map"></div>
+      </div>
+    </div>
 
-        
+    <div id="sidebar" class="sidebar">
+      <h2 id="partyName"></h2>
+      <p id="partyDescription"></p>
+      <p id="partyDate"></p>
+      <p id="partyStartTime"></p>
+      <button id="viewHostProfile">View Host Profile</button>
+    </div>
 
-        <div id="sidebar" class="sidebar">
-          <h2 id="partyName"></h2>
-          <p id="partyDescription"></p>
-          <p id="partyDate"></p>
-          <p id="partyStartTime"></p>
-          <button id="viewHostProfile">View Host Profile</button>
-        </div>
+    <div id="hostProfilePopup" class="host-profile-popup">
+      <div class="host-profile-content">
+        <h2 id="hostName"></h2>
+        <p id="partiesAttended"></p>
+        <button id="closeHostProfile">Close</button>
+      </div>
+    </div>
 
-        <div id="hostProfilePopup" class="host-profile-popup">
-          <div class="host-profile-content">
-            <h2 id="hostName"></h2>
-            <p id="partiesAttended"></p>
-            <button id="closeHostProfile">Close</button>
-          </div>
-        </div>
+  </body>
 
-      </body>
+  <%- include ('../partials/footer') %>
+</main>
 
-      <%- include ('../partials/footer') %>
-    </main>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
 
-    <style>
-      .sidebar {
-  position: fixed;
-  top: 50%;
-  right: -250px;
-  width: 250px;
-  height: 75%;
-  background-color: #fff;
-  padding: 1rem;
-  box-shadow: -px 0px 10px rgba(0, 0, 0, 0.644);
-  transition: right 0.3s ease-in-out;
-  transform: translateY(-50%);
-}
+  .menu-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+  }
 
+  #map {
+    position: absolute;
+    top: 64px; /* height of the menu bar */
+    left: 0;
+    right: 0;
+    bottom: 60px; /* height of the footer */
+    z-index: 0;
+  }
 
-      .sidebar.active {
-        right: 0;
-      }
+  .sidebar {
+    position: fixed;
+    top: 50%;
+    right: -250px;
+    width: 250px;
+    height: 75%;
+    background-color: #fff;
+    padding: 1rem;
+    box-shadow: -px 0px 10px rgba(0, 0, 0, 0.644);
+    transition: right 0.3s ease-in-out;
+    transform: translateY(-50%);
+  }
 
-      .host-profile-popup {
-        display: none;
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1000;
-      }
+  .sidebar.active {
+    right: 0;
+  }
 
-      .host-profile-content {
-        background-color: #fff;
-        width: 300px;
-        padding: 1rem;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-      }
+  .host-profile-popup {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
 
-      body {
-        margin: 0;
-        padding: 0;
-      }
-
-      .menu-bar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 100;
-      }
-
-      #map {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 0;
-      }
-    </style>
+  .host-profile-content {
+    background-color: #fff;
+    width: 300px;
+    padding: 1rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  }
+</style>
 
       <script>
         // Load the Mapbox GL JS library
