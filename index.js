@@ -64,6 +64,24 @@ app.use(
 
 // TODO - Include your API routes here
 
+// Get parties
+app.get('/api/parties', async (req, res) => {
+  const query = "SELECT * FROM party_info;";
+  try {
+    const party_data = await db.any(query);
+    res.json(party_data);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Error fetching party data." });
+  }
+});
+// app.get('/api/parties', async (req, res) => {
+//   const parties = await getPartiesFromDatabase(); // Replace this line with your actual method for fetching parties from the database
+//   console.log('Fetched parties:', parties);
+//   res.json(parties);
+// });
+
+
 app.get('/welcome', (req, res) => {
   res.json({ status: 'success', message: 'Welcome!' });
 });
