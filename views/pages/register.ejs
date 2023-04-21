@@ -62,4 +62,28 @@
   </div>
 </main>
 
+<script>
+  function isValidEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
+  document.querySelector("form").addEventListener("submit", function (event) {
+    const firstName = document.getElementById("firstName").value.trim();
+    const lastName = document.getElementById("lastName").value.trim();
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if (!firstName || !lastName || !username || !email || !password) {
+      event.preventDefault();
+      alert("All fields are required.");
+    } else if (!isValidEmail(email)) {
+      event.preventDefault();
+      alert("Please enter a valid email address.");
+    }
+  });
+</script>
+
+
 <%- include ('../partials/footer') %>
