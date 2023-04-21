@@ -130,6 +130,8 @@
       }
 
       function showHostProfile(hostUserId) {
+
+
         const hostName = "Name Here";
         const partiesAttended = 5;
 
@@ -147,6 +149,17 @@
 
 
       async function fetchParties() {
+        try {
+          const response = await fetch('/api/parties');
+          const parties = await response.json();
+          console.log('Fetched parties (client-side):', parties);
+          return parties;
+        } catch (error) {
+          console.error('Error fetching parties:', error);
+        }
+      }
+
+      async function FetchUsers() {
         try {
           const response = await fetch('/api/parties');
           const parties = await response.json();
@@ -194,6 +207,12 @@
           center: [-105.2705, 40.0150], // Boulder, CO coordinates by default but center based off location if given later
           zoom: 14
         });
+
+        // disable map rotation using right click + drag
+        map.dragRotate.disable();
+        
+        // disable map rotation using touch rotation gesture
+        map.touchZoomRotate.disableRotation();
 
         map.addControl(new mapboxgl.NavigationControl());
 
