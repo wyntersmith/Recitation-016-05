@@ -75,12 +75,8 @@ app.get('/api/parties', async (req, res) => {
     res.status(500).json({ error: "Error fetching party data." });
   }
 });
-// app.get('/api/parties', async (req, res) => {
-//   const parties = await getPartiesFromDatabase(); // Replace this line with your actual method for fetching parties from the database
-//   console.log('Fetched parties:', parties);
-//   res.json(parties);
-// });
 
+app.use(express.static('public'));
 
 app.get('/welcome', (req, res) => {
   res.json({ status: 'success', message: 'Welcome!' });
