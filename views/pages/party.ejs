@@ -3,212 +3,210 @@
 
 <main style="background: #6a11cb;">
 
-  <body>
-    <div class="container">
-      <div class="content">
-        <div id="map"></div>
+<body>
+  <div class="container">
+    <div class="content">
+      <div id="map"></div>
+        </div>
       </div>
-    </div>
 
-    <div id="sidebar" class="sidebar">
-      <h2 id="partyName"></h2>
-      <p id="partyDescription"></p>
-      <p id="partyDate"></p>
-      <p id="partyStartTime"></p>
-      <button id="viewHostProfile">View Host Profile</button>
-    </div>
-
-    <div id="hostProfilePopup" class="host-profile-popup">
-      <div class="host-profile-content">
-        <h2 id="hostName"></h2>
-        <p id="partiesAttended"></p>
-        <button id="closeHostProfile">Close</button>
+      <div id="sidebar" class="sidebar">
+        <h2 id="partyName"></h2>
+        <p id="partyDescription"></p>
+        <p id="partyDate"></p>
+        <p id="partyStartTime"></p>
+        <button id="viewHostProfile">View Host Profile</button>
       </div>
-    </div>
 
-  </body>
+      <div id="hostProfilePopup" class="host-profile-popup">
+        <div class="host-profile-content">
+          <h2 id="hostName"></h2>
+          <p id="partiesAttended"></p>
+          <button id="closeHostProfile">Close</button>
+        </div>
+      </div>
 
-  <%- include ('../partials/footer') %>
-</main>
+      </body>
 
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-  }
+    <%- include ('../partials/footer') %>
+  </main>
 
-  .menu-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-  }
+  <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
 
-  #map {
-    position: absolute;
-    top: 64px; /* height of the menu bar */
-    left: 0;
-    right: 0;
-    bottom: 60px; /* height of the footer */
-    z-index: 0;
-  }
+      .menu-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+      }
 
-  .sidebar {
-    position: fixed;
-    top: 50%;
-    right: -250px;
-    width: 250px;
-    height: 75%;
-    background-color: #fff;
-    padding: 1rem;
-    box-shadow: -px 0px 10px rgba(0, 0, 0, 0.644);
-    transition: right 0.3s ease-in-out;
-    transform: translateY(-50%);
-  }
+      #map {
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        bottom: 60px;
+        z-index: 0;
+      }
 
-  .sidebar.active {
-    right: 0;
-  }
+      .sidebar {
+        position: fixed;
+        top: 50%;
+        right: -250px;
+        width: 250px;
+        height: 75%;
+        background-color: #fff;
+        padding: 1rem;
+        box-shadow: -px 0px 10px rgba(0, 0, 0, 0.644);
+        transition: right 0.3s ease-in-out;
+        transform: translateY(-50%);
+      }
 
-  .host-profile-popup {
-    display: none;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-  }
+      .sidebar.active {
+        right: 0;
+      }
 
-  .host-profile-content {
-    background-color: #fff;
-    width: 300px;
-    padding: 1rem;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  }
-</style>
+      .host-profile-popup {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
 
-      <script>
-        // Load the Mapbox GL JS library
-        const script = document.createElement('script');
-        script.src = 'https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js';
-        script.onload = () => initMap();
-        document.head.appendChild(script);
-        document.write('<link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />');
+      .host-profile-content {
+        background-color: #fff;
+        width: 300px;
+        padding: 1rem;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+      }
+    </style>
 
-        function showSidebar(party) {
-          document.getElementById('partyName').innerText = party.party_name;
-          document.getElementById('partyDescription').innerText = party.party_description;
-          document.getElementById('partyDate').innerText = `Date: ${party.party_date}`;
-          document.getElementById('partyStartTime').innerText = `Start Time: ${party.start_time}`;
+    <script>
+      // Load the Mapbox GL JS library
+      const script = document.createElement('script');
+      script.src = 'https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js';
+      script.onload = () => initMap();
+      document.head.appendChild(script);
+      document.write('<link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />');
 
-          // Show sidebar
-          document.getElementById('sidebar').classList.add('active');
+      function showSidebar(party) {
+        document.getElementById('partyName').innerText = party.party_name;
+        document.getElementById('partyDescription').innerText = party.party_description;
+        document.getElementById('partyDate').innerText = `Date: ${party.party_date}`;
+        document.getElementById('partyStartTime').innerText = `Start Time: ${party.start_time}`;
 
-          // Add event listener for host profile button
-          document.getElementById('viewHostProfile').onclick = () => {
-            showHostProfile(party.host_user_id);
-          };
+        // Show sidebar
+        document.getElementById('sidebar').classList.add('active');
+
+        // Add event listener for host profile button
+        document.getElementById('viewHostProfile').onclick = () => {
+          showHostProfile(party.host_user_id);
+        };
+      }
+
+      function showHostProfile(hostUserId) {
+        const hostName = "Name Here";
+        const partiesAttended = 5;
+
+        document.getElementById('hostName').innerText = hostName;
+        document.getElementById('partiesAttended').innerText = `Parties Attended: ${partiesAttended}`;
+
+        // Show host profile popup
+        document.getElementById('hostProfilePopup').style.display = 'block';
+
+        // Add event listener for close button
+        document.getElementById('closeHostProfile').onclick = () => {
+          document.getElementById('hostProfilePopup').style.display = 'none';
+        };
+      }
+
+
+      async function fetchParties() {
+        try {
+          const response = await fetch('/api/parties');
+          const parties = await response.json();
+          console.log('Fetched parties (client-side):', parties);
+          return parties;
+        } catch (error) {
+          console.error('Error fetching parties:', error);
         }
-
-        function showHostProfile(hostUserId) {
-          // Fetch host profile information based on hostUserId
-          // Here, we're using dummy data for illustration purposes
-          const hostName = "John Doe";
-          const partiesAttended = 5;
-
-          document.getElementById('hostName').innerText = hostName;
-          document.getElementById('partiesAttended').innerText = `Parties Attended: ${partiesAttended}`;
-
-          // Show host profile popup
-          document.getElementById('hostProfilePopup').style.display = 'block';
-
-          // Add event listener for close button
-          document.getElementById('closeHostProfile').onclick = () => {
-            document.getElementById('hostProfilePopup').style.display = 'none';
-          };
-        }
+      }
 
 
-        async function fetchParties() {
-          try {
-            const response = await fetch('/api/parties');
-            const parties = await response.json();
-            console.log('Fetched parties (client-side):', parties);
-            return parties;
-          } catch (error) {
-            console.error('Error fetching parties:', error);
-          }
-        }
+      async function createPopup(party) {
+        const container = document.createElement('div');
 
+        const name = document.createElement('h3');
+        name.textContent = party.party_name;
+        container.appendChild(name);
 
-        async function createPopup(party) {
-          const container = document.createElement('div');
+        const location = document.createElement('p');
+        location.textContent = `Location: ${party.location}`;
+        container.appendChild(location);
 
-          const name = document.createElement('h3');
-          name.textContent = party.party_name;
-          container.appendChild(name);
+        const date = document.createElement('p');
+        date.textContent = `Date: ${party.party_date}`;
+        container.appendChild(date);
 
-          const location = document.createElement('p');
-          location.textContent = `Location: ${party.location}`;
-          container.appendChild(location);
+        const time = document.createElement('p');
+        time.textContent = `Start Time: ${party.start_time}`;
+        container.appendChild(time);
 
-          const date = document.createElement('p');
-          date.textContent = `Date: ${party.party_date}`;
-          container.appendChild(date);
+        const description = document.createElement('p');
+        description.textContent = party.party_description;
+        container.appendChild(description);
 
-          const time = document.createElement('p');
-          time.textContent = `Start Time: ${party.start_time}`;
-          container.appendChild(time);
+        return new mapboxgl.Popup().setDOMContent(container);
+      }
 
-          const description = document.createElement('p');
-          description.textContent = party.party_description;
-          container.appendChild(description);
+      // Initialize the map
+      async function initMap() {
+        mapboxgl.accessToken = 'pk.eyJ1IjoiaGF5ZGVidWciLCJhIjoiY2xmbmdhY21oMDZ2ODN0cGo4M250eTZlcCJ9.CFyfPc5kxT_YYwDkNGlJvA';
 
-          return new mapboxgl.Popup().setDOMContent(container);
-        }
+        const map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/mapbox/streets-v11',
+          center: [-105.2705, 40.0150], // Boulder, CO coordinates by default but center based off location if given later
+          zoom: 14
+        });
 
-        // Initialize the map
-        async function initMap() {
-          mapboxgl.accessToken = 'pk.eyJ1IjoiaGF5ZGVidWciLCJhIjoiY2xmbmdhY21oMDZ2ODN0cGo4M250eTZlcCJ9.CFyfPc5kxT_YYwDkNGlJvA';
+        map.addControl(new mapboxgl.NavigationControl());
 
-          const map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v11',
-            center: [-105.2705, 40.0150], // Boulder, CO coordinates
-            zoom: 14
+        // Get user's current location and set the map's center
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            map.setCenter([position.coords.longitude, position.coords.latitude]);
+          },
+          (error) => {
+            console.error('Error getting current location:', error);
+          },
+          { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+        );
+
+        const parties = await fetchParties();
+
+        for (const party of parties) {
+          const marker = new mapboxgl.Marker()
+            .setLngLat([party.longitude, party.latitude])
+            .addTo(map);
+
+          // Add event listener for marker click
+          marker.getElement().addEventListener('click', () => {
+            showSidebar(party);
           });
-
-          map.addControl(new mapboxgl.NavigationControl());
-
-          // Get user's current location and set the map's center
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              map.setCenter([position.coords.longitude, position.coords.latitude]);
-            },
-            (error) => {
-              console.error('Error getting current location:', error);
-            },
-            { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
-          );
-
-          const parties = await fetchParties();
-
-          for (const party of parties) {
-            const marker = new mapboxgl.Marker()
-              .setLngLat([party.longitude, party.latitude])
-              .addTo(map);
-
-            // Add event listener for marker click
-            marker.getElement().addEventListener('click', () => {
-              showSidebar(party);
-            });
-          }
         }
-      </script>
+      }
+    </script>

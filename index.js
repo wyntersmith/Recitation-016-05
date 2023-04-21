@@ -76,6 +76,7 @@ app.get('/api/parties', async (req, res) => {
   }
 });
 
+// Setup CSS
 app.use(express.static('public'));
 
 app.get('/welcome', (req, res) => {
