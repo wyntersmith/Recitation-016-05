@@ -97,13 +97,19 @@ app.post("/login", (req, res) => {
           res.redirect("/profile");
         }
         else {
-          res.redirect("/profile");
+          res.status(403).render("pages/login");  //incorrect password
         }
       }
     })
     .catch((err) => {
-      console.log(err);
-      res.redirect("/profile");
+      if (err instanceof pgp.errors.QueryResultError && err.code == pgp.errors.queryResultErrorCode.noData) { //incorrect username
+        res.status(403).render("pages/login", {denied: true});
+      }
+      else {
+        console.log(err);
+        res.status(500).render("pages/error");
+      }
+
     });
 });
 
@@ -203,6 +209,10 @@ app.get("/party", (req, res) => {
   res.render("pages/party");
 });
 
+app.post("party", (req, res) => {
+  //const query = "insert into party_info (host_user_id, party_name,location, party_date, start_time, party_description) values ($1,$2,$3,$4,$5, $6)";
+});
+
 app.get("/logout", (req, res) => {
   req.session.destroy();
   res.render("pages/login");
@@ -213,5 +223,8 @@ app.get("/logout", (req, res) => {
 // <!-- Section 5 : Start Server-->
 // *****************************************************
 // starting the server and keeping the connection open to listen for more requests
-app.listen(3000);
+module.exports = {
+  server: app.listen(3000),
+  db: db,
+};
 console.log('Server is listening on port 3000');
