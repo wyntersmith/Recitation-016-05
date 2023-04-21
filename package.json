@@ -12,7 +12,7 @@
     "express-session": "1.17.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7",
+    "nodemon": "2.0.20",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "mocha": "^6.2.2",
@@ -23,7 +23,7 @@
     "start": "node index.js",
     "dev": "nodemon server.js",
     "test": "mocha",
-    "testandrun": "npm run prestart && npm run test && npm start"
+    "testandrun": "npm run prestart && npm run test && npm start && nodemon -L index.js"
   }
 }
 
