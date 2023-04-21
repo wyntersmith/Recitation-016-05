@@ -64,6 +64,25 @@ app.use(
 
 // TODO - Include your API routes here
 
+// Get parties
+app.get('/api/parties', async (req, res) => {
+  const query = "SELECT * FROM party_info;";
+  try {
+    const party_data = await db.any(query);
+    res.json(party_data);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Error fetching party data." });
+  }
+});
+
+app.get('/api/partyHostInfo', async (req, res) => {
+  
+})
+
+// Setup CSS
+app.use(express.static('public'));
+
 app.get('/welcome', (req, res) => {
   res.json({ status: 'success', message: 'Welcome!' });
 });
@@ -97,7 +116,7 @@ app.post("/login", (req, res) => {
           res.redirect("/profile");
         }
         else {
-          res.status(403).render("pages/login");  //incorrect password
+          res.status(403).render("pages/login", {denied: true});  //incorrect password
         }
       }
     })
@@ -139,7 +158,7 @@ app.use(auth); // Authentication required
 
 // Home case - redirect to discover
 app.get('/', (req, res) => {
-  res.redirect('/discover');
+  res.redirect('/party');
 });
 
 
@@ -174,42 +193,27 @@ app.get('/profile', async (req, res) => {
 
 });
 
-app.get('/discover', async (req, res) => {
-  console.log("Discover page");
-  const query = "select * from party_info;";
-  try {
-    party_data = await db.any(query)
-    console.log(party_data);
-    res.render('pages/discover', {
-      data: party_data,
-    });
-  } catch (err) {
-    console.log(err);
-    res.render('pages/discover');
-  }
-
-
-
-  // db.any(query)
-  // .then(function (party_data) {
-  //   console.log(party_data); 
-  //   res.render('pages/discover', {
-  //     data: party_data,
-  //   });
-  // })
-  // .catch(function (err) {
-  //   console.log(err);
-  //   res.render('pages/discover');
-  // });
-
-});
+// app.get('/discover', async (req, res) => {
+//   console.log("Discover page");
+//   const query = "select * from party_info;";
+//   try {
+//     party_data = await db.any(query)
+//     console.log(party_data);
+//     res.render('pages/discover', {
+//       data: party_data,
+//     });
+//   } catch (err) {
+//     console.log(err);
+//     res.render('pages/discover');
+//   }
+// });
 
 
 app.get("/party", (req, res) => {
   res.render("pages/party");
 });
 
-app.post("party", (req, res) => {
+app.post("/party", (req, res) => {
   //const query = "insert into party_info (host_user_id, party_name,location, party_date, start_time, party_description) values ($1,$2,$3,$4,$5, $6)";
 });
 
