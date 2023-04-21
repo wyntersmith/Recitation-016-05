@@ -144,7 +144,7 @@ app.post('/register', async (req, res) => {
   db.any(query1, [req.body.username, req.body.email])
   .then(function (data) {
     if (data.length) {
-      res.redirect('/register');
+      res.redirect('/register', {message: "Username or Email already exists"});
     }
     else {
       db.any(query, [req.body.username, req.body.email, req.body.firstName, req.body.lastName, hashedPassword])
