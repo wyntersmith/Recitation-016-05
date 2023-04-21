@@ -1,5 +1,5 @@
 <%- include ('../partials/header') %>
-  <%- include ('../partials/menu') %>
+<%- include ('../partials/menu') %>
 
     <main style="background: #6a11cb;">
 
@@ -7,12 +7,13 @@
         <div class="container">
           <p>Party Page</p>
           <div class="content">
+            
             <div id="map"></div>
-            <footer class="footer">
-              <%- include ('../partials/footer') %>
-            </footer>
+            
           
         </div>
+
+        
 
         <div id="sidebar" class="sidebar">
           <h2 id="partyName"></h2>
@@ -31,20 +32,24 @@
         </div>
 
       </body>
+
+      <%- include ('../partials/footer') %>
     </main>
 
     <style>
       .sidebar {
-        position: fixed;
-        top: 0;
-        right: -250px;
-        width: 250px;
-        height: 100%;
-        background-color: #fff;
-        padding: 1rem;
-        box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.1);
-        transition: right 0.3s ease-in-out;
-      }
+  position: fixed;
+  top: 50%;
+  right: -250px;
+  width: 250px;
+  height: 75%;
+  background-color: #fff;
+  padding: 1rem;
+  box-shadow: -px 0px 10px rgba(0, 0, 0, 0.644);
+  transition: right 0.3s ease-in-out;
+  transform: translateY(-50%);
+}
+
 
       .sidebar.active {
         right: 0;
@@ -88,20 +93,10 @@
       #map {
         position: absolute;
         top: 0;
-        /* Adjust this value based on the height of your menu bar */
         left: 0;
         right: 0;
         bottom: 0;
-        /* Adjust this value based on the height of your footer */
         z-index: 0;
-      }
-
-      .footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        z-index: 100;
       }
     </style>
 
