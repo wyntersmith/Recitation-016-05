@@ -141,14 +141,26 @@ const auth = (req, res, next) => {
 };
 
 app.post('/register', async (req, res) => {
+  if(req.body.username == '' || req.body.firstName == '' || req.body.lastName == '' || req.body.email == '' || req.body.password == ''){
+    res.status(400).render("pages/register", {
+      isUsernameValid: req.body.username != '',
+      isFirstNameValid: req.body.firstName != '',
+      isLastNameValid: req.body.lastName != '',
+      isEmailValid: req.body.email != '',
+      isPasswordValid: req.body.password != '',
+    })
+    return;
+  }
+
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   const query1 = "select * from users where username = $1 or email = $2;"
   const query = "insert into users (username,email,firstName,lastName, password) values ($1,$2,$3,$4,$5);";
 
+  
   db.any(query1, [req.body.username, req.body.email])
   .then(function (data) {
-    if (data.length) {
-      res.render('pages/register', {message: "Username or Email already in use"});
+    if (data.length) { 
+      res.status(400).render('pages/register', {message: "Username or Email already in use"});
     }
     else {
       db.any(query, [req.body.username, req.body.email, req.body.firstName, req.body.lastName, hashedPassword])

@@ -24,6 +24,7 @@ after(async () => {
   db.any(query, [testUser.username]);
 });
 
+
 // Chai HTTP provides an interface for live integration testing of the API's.
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -130,25 +131,27 @@ describe('Server test cases', () => {
         expect(res).to.redirect;
         expect(res.headers).to.have.property('location');
         expect(res.headers.location).to.include('/login');
+        const query = "delete from users where username = 'adalovelace'";
+        db.any(query);
         done();
       });
   });
 
-  // it('Test register with invalid info returns 403', done => {
-  //   chai
-  //     .request(server)
-  //     .post('/register')
-  //     .set('content-type', 'application/x-www-form-urlencoded')
-  //     .send({
-  //       firstName: '',
-  //       lastName: '',
-  //       username: '',
-  //       email: '', 
-  //       password: '',
-  //     })
-  //     .end((err, res) => {
-  //       expect(res).to.have.status(403)
-  //       done();
-  //     });
-  // });
+  it('Test register with invalid info returns 400', done => {
+    chai
+      .request(server)
+      .post('/register')
+      .set('content-type', 'application/x-www-form-urlencoded')
+      .send({
+        firstName: '',
+        lastName: '',
+        username: '',
+        email: '', 
+        password: '',
+      })
+      .end((err, res) => {
+        expect(res).to.have.status(400)
+        done();
+      });
+  });
 });
