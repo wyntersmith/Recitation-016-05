@@ -54,7 +54,6 @@ describe('Server test cases', () => {
   // server never runs if tests are failing so separated them
 
   // LOGIN PAGE
-  // LOGIN PAGE
   it('Test login with valid user redirects to profile', done => {
     chai
       .request(server)
@@ -154,4 +153,23 @@ describe('Server test cases', () => {
         done();
       });
   });
+
+  it('Test register with user or email already in database returns 400', done => {
+    chai
+      .request(server)
+      .post('/register')
+      .set('content-type', 'application/x-www-form-urlencoded')
+      .send({
+        firstName: testUser.firstName,
+        lastName: testUser.lastName,
+        username: testUser.username,
+        email: testUser.email, 
+        password: testUser.password,
+      })
+      .end((err, res) => {
+        expect(res).to.have.status(400)
+        done();
+      });
+  });
+
 });
