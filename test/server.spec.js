@@ -72,6 +72,22 @@ describe('Server test cases', () => {
       });
   });
 
+  it('Test login with valid user and incorrect password returns 403', done => {
+    chai
+      .request(server)
+      .post('/login')
+      .set('content-type', 'application/x-www-form-urlencoded')
+      .send({
+        username: testUser.username, 
+        password: 'InvalidPassword',
+      })
+      .end((err, res) => {
+        expect(res).to.have.status(403)
+        done();
+      });
+  });
+
+
   it('Test login with invalid user returns 403', done => {
     chai
       .request(server)
