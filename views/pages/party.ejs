@@ -117,7 +117,8 @@
       function showSidebar(party) {
         document.getElementById('partyName').innerText = party.party_name;
         document.getElementById('partyDescription').innerText = party.party_description;
-        document.getElementById('partyDate').innerText = `Date: ${party.party_date}`;
+        var date = new Date(party.party_date);
+        document.getElementById('partyDate').innerText = `Date: ${date.toLocaleDateString()}`;
         document.getElementById('partyStartTime').innerText = `Start Time: ${party.start_time}`;
 
         // Show sidebar
