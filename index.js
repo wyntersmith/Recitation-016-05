@@ -241,8 +241,17 @@ app.get("/party", (req, res) => {
   res.render("pages/party");
 });
 
-app.post("/party", (req, res) => {
-  //const query = "insert into party_info (host_user_id, party_name,location, party_date, start_time, party_description) values ($1,$2,$3,$4,$5, $6)";
+app.post("/add_party", (req, res) => {
+  //const query = "insert into party_info (host_user_id, party_name,location, party_date, start_time, party_description, party_image) values ($1,$2,$3,$4,$5, $6, $7)";
+
+  // try{
+
+  // } catch (err) {
+  //   console.log(err);
+  //   res.render('pages/error');
+  //   return;
+
+  // }
 });
 
 
