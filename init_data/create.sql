@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS party_info (
   party_date DATE NOT NULL,
   start_time TIME(4),
   party_description VARCHAR(144),
+  party_image TEXT,
   FOREIGN KEY(host_user_id)
 	REFERENCES users(user_id)
 );
