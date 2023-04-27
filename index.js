@@ -245,6 +245,12 @@ app.post("/party", (req, res) => {
   //const query = "insert into party_info (host_user_id, party_name,location, party_date, start_time, party_description) values ($1,$2,$3,$4,$5, $6)";
 });
 
+
+app.get("/add_party", (req, res) => {
+  res.render("pages/add_party");
+});
+
+
 app.get("/logout", (req, res) => {
   req.session.destroy();
   res.render("pages/login");
