@@ -15,12 +15,25 @@
         </div>
         </div>
 
-        <div id="sidebar" class="sidebar" style="border-radius: 1rem;">
+        <!-- <div id="sidebar" class="sidebar" style="border-radius: 1rem;"> -->
+        <!-- <div id="sidebar">
           <h2 class="text-light" id="partyName"></h2>
           <p class="text-light" id="partyDescription"></p>
           <p class="text-light" id="partyDate"></p>
           <p class="text-light" id="partyStartTime"></p>
-          <button class="btn btn-dark" id="viewHostProfile">View Host Profile</button>
+          <button class="btn btn-dark" id="viewHostProfile" style="visibility: hidden;" >View Host Profile</button>
+        </div> -->
+        <div style="padding: 2%;">
+          <div class="card text-white bg-dark border-dark mb-3" id="sidebar" style="width: 33rem; visibility: hidden;">
+              <img src="..." class="card-img-top" id="partyImage" style="padding: 2%;" alt="party image">
+            <div class="card-body">
+              <h5 class="card-title" id="partyName"></h5>
+              <p class="card-text" id="partyDescription"></p>
+              <p class="card-text" id="partyDate"></p>
+              <p class="card-text" id="partyStartTime"></p>
+              <button class="btn btn-secondary" id="viewHostProfile" style="visibility: hidden;">View Host</button>
+            </div>
+          </div>
         </div>
 
         <div id="hostProfilePopup" class="host-profile-popup">
@@ -122,7 +135,11 @@
         document.getElementById('partyStartTime').innerText = `Start Time: ${party.start_time}`;
 
         // Show sidebar
-        document.getElementById('sidebar').classList.add('active');
+        let sidebar =  document.getElementById('sidebar');
+        sidebar.classList.add('active');
+        sidebar.style.visibility = 'visible';
+
+        document.getElementById('viewHostProfile').style.visibility = 'visible';
 
         // Add event listener for host profile button
         document.getElementById('viewHostProfile').onclick = () => {
