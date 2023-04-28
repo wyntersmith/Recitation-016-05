@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS party_info (
   party_name VARCHAR(50),
   latitude DECIMAL(9,6) NOT NULL,
   longitude DECIMAL(9,6) NOT NULL,
+  party_address TEXT,
   party_date DATE NOT NULL,
   start_time TIME(4),
   party_description VARCHAR(144),
