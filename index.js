@@ -242,17 +242,29 @@ app.get("/party", (req, res) => {
 });
 
 app.post("/add_party", (req, res) => {
-  //const query = "insert into party_info (host_user_id, party_name,location, party_date, start_time, party_description, party_image) values ($1,$2,$3,$4,$5, $6, $7)";
+  //const query_check = "select * from party_info where party_name = $1 and host_user_id = $2;";
+  const query = "insert into party_info (host_user_id, party_name, latitude, longitude, party_date, start_time, party_description) values ($1,$2,$3,$4,$5,$6,$7)";
 
-  // try{
+  const host_user_id = req.session.user.user_id;
+  const party_name  = req.body.inputPartyName;
+  const latitude = req.body.latitude;
+  const longitude = req.body.longitude;
+  const party_date = req.body.party_date;
+  const start_time = req.body.start_time;
+  const party_description = req.body.inputDescription;
+  // const party_image = req.body.party_image;
 
-  // } catch (err) {
-  //   console.log(err);
-  //   res.render('pages/error');
-  //   return;
-
-  // }
+  console.log("Test", host_user_id, party_name, latitude, longitude, party_date, start_time, party_description); 
+  db.any(query, [host_user_id, party_name, latitude, longitude, party_date, start_time, party_description])
+  .then(function (data) {
+    res.render('pages/party', {message: "Succesfully added party"});
+  })
+  .catch(function (err) {
+    res.redirect('/add_party');
+  });
+  
 });
+
 
 
 app.get("/add_party", (req, res) => {
