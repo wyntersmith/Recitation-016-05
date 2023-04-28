@@ -189,6 +189,33 @@ app.get('/', (req, res) => {
   res.redirect('/party');
 });
 
+app.get('/get_profile/:host_user_id', async (req, res) => {
+  const query = "select * from users where user_id = $1;";
+  const query1 = "select * from user_parties where user_id = $1;";
+// console.log(req.params, req.query)
+  // console.log(req.params['host_user_id']);
+  db.any(query, [req.params['host_user_id']])
+  .then(function (data) {
+
+    db.any(query1, [req.params['host_user_id']])
+    .then(function (data1) {
+      // Return data
+      // console.log(data,data1);
+      res.json({return_data: data, return_data1: data1});
+
+    })
+    .catch(function (err) {
+      res.json({ error: "Error fetching user data." });
+    });  
+
+
+  })
+  .catch(function (err) {
+    res.json({ error: "Error fetching user data." });
+  });
+
+});
+
 
 app.get('/profile', async (req, res) => {
   const query = "select * from user_parties where user_id = $1";
