@@ -63,10 +63,11 @@
                             placeholder="https://...">
                         </div>
 
-                        <div class="form-group">
-                              <label for="inputAddress" class="col-form-label col-form-label-lg">Street Address</label>
-                              <input type="text" class="form-control form-control-lg" id="inputAddress" name="inputAddress" placeholder="1234 Street Name St.">
-                            </div>
+                        <div class="form-group" id="geocoder-container">
+                          <label for="inputAddress" class="col-form-label col-form-label-lg">Street Address</label>
+                          <input type="text" class="form-control form-control-lg" id="inputAddress" name="inputAddress" placeholder="1234 Street Name St." hidden>
+                        </div>
+                        
 
                         <div class="form-row">
                               <div class="form-group col-md-6">
@@ -152,6 +153,44 @@
             </div>
           </div>
         </section>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            // Set your Mapbox access token here
+            mapboxgl.accessToken = "pk.eyJ1IjoiaGF5ZGVidWciLCJhIjoiY2xmbmdhY21oMDZ2ODN0cGo4M250eTZlcCJ9.CFyfPc5kxT_YYwDkNGlJvA";
+        
+            // Initialize MapboxGeocoder
+            const geocoder = new MapboxGeocoder({
+              accessToken: mapboxgl.accessToken,
+              mapboxgl: mapboxgl,
+              marker: false,
+              container: 'geocoder-container',
+              placeholder: '1234 Street Name St.',
+              inputClass: 'form-control form-control-lg',
+              proximity: [-105.2705, 40.0150] // Add this line to set the proximity to Boulder, Colorado
+            });
+
+        
+            // Add the geocoder to your HTML element
+            document.getElementById("geocoder-container").appendChild(geocoder.onAdd());
+        
+            // Listen for the 'result' event
+            geocoder.on("result", function (event) {
+              const address = event.result.place_name;
+              const city = event.result.context.find((c) => c.id.startsWith("place"));
+              const state = event.result.context.find((c) => c.id.startsWith("region"));
+              const zip = event.result.context.find((c) => c.id.startsWith("postcode"));
+        
+              document.getElementById("inputCity").value = city ? city.text : "";
+              document.getElementById("inputState").value = state ? state.short_code.split('-')[1] : ""; // Updated to get state acronym
+              document.getElementById("inputZip").value = zip ? zip.text : "";
+            });
+          });
+        </script>
+        
+        
+        
+
       </body>
     </main>
 
