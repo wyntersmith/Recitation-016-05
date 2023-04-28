@@ -6,13 +6,14 @@
       <body style="background: #6a11cb;">
         <div class="container">
           <div class="row">
-          <div class="content">
-            <div id="map"></div>
+            <div class="content">
+
+              <div id="map"></div>
+            </div>
+            <div class="row">
+
+            </div>
           </div>
-          <div class="row">
-              
-          </div>
-        </div>
         </div>
 
         <!-- <div id="sidebar" class="sidebar" style="border-radius: 1rem;"> -->
@@ -24,17 +25,21 @@
           <button class="btn btn-dark" id="viewHostProfile" style="visibility: hidden;" >View Host Profile</button>
         </div> -->
         <div style="padding-left: 24px; padding-top: 24px; ">
-          <div class="jumbotron jumbotron-fluid" style="height: 25vh; max-width: 33%; border-radius: 10px 100px / 120px; box-shadow: 0 10px 16px ; ">
+          <div class="jumbotron jumbotron-fluid"
+            style="height: 25vh; max-width: 33%; border-radius: 10px 100px / 120px; box-shadow: 0 10px 16px ; ">
             <div class="container" style="padding-left: 15%;">
-              <h1 class="display-4 display: flex;" style="padding-top: 0px;" >Find a party!</h1>
+              <h1 class="display-4 display: flex;" style="padding-top: 0px;">Find a party!</h1>
               <p class="lead">Click on a location to see the party detials.</p>
-              </div>
             </div>
+          </div>
         </div>
 
         <div style="padding-left: 2%; padding-right: 2%; height: 56vh; display: flex;">
           <div class="card text-white bg-dark border-dark mb-3" id="sidebar" style="width: 33%; visibility: hidden;">
-              <img src="https://voyd-theta.s3.amazonaws.com/group_website/groups/bf634e52-dc41-4b3b-8101-efb69cd3ffa8/IMG_0016.JPG" class="card-img-top" id="partyImage" style="padding: 2%; height: 40%; object-fit: cover;" alt="party image">
+            <img
+              src="https://voyd-theta.s3.amazonaws.com/group_website/groups/bf634e52-dc41-4b3b-8101-efb69cd3ffa8/IMG_0016.JPG"
+              class="card-img-top" id="partyImage" style="padding: 2%; height: 40%; object-fit: cover;"
+              alt="party image">
             <div class="card-body" style="height: 30vh;">
               <h5 class="card-title" id="partyName"></h5>
               <p class="card-text" id="partyDescription"></p>
@@ -146,7 +151,7 @@
         document.getElementById('partyStartTime').innerText = `Start Time: ${party.start_time}`;
 
         // Show sidebar
-        let sidebar =  document.getElementById('sidebar');
+        let sidebar = document.getElementById('sidebar');
         sidebar.classList.add('active');
         sidebar.style.visibility = 'visible';
 
@@ -228,7 +233,9 @@
 
       // Initialize the map
       async function initMap() {
-        mapboxgl.accessToken = 'pk.eyJ1IjoiaGF5ZGVidWciLCJhIjoiY2xmbmdhY21oMDZ2ODN0cGo4M250eTZlcCJ9.CFyfPc5kxT_YYwDkNGlJvA';
+        let key = 'pk.eyJ1IjoiaGF5ZGVidWciLCJhIjoiY2xmbmdhY21oMDZ2ODN0cGo4M250eTZlcCJ9.CFyfPc5kxT_YYwDkNGlJvA'
+
+        mapboxgl.accessToken = key;
 
         const map = new mapboxgl.Map({
           container: 'map',
@@ -239,11 +246,32 @@
 
         // disable map rotation using right click + drag
         map.dragRotate.disable();
-        
+
         // disable map rotation using touch rotation gesture
         map.touchZoomRotate.disableRotation();
 
         map.addControl(new mapboxgl.NavigationControl());
+
+        // Add the search box (geocoding control) to the map
+        const geocoder = new MapboxGeocoder({
+          accessToken: mapboxgl.accessToken,
+          mapboxgl: mapboxgl,
+          proximity: { longitude: -105.2705, latitude: 40.0150 }
+        });
+
+        map.addControl(geocoder);
+
+        // Listen for the 'result' event of the MapboxGeocoder
+        geocoder.on('result', function (event) {
+          const address = event.result.place_name;
+          const latitude = event.result.geometry.coordinates[1];
+          const longitude = event.result.geometry.coordinates[0];
+
+          console.log(`Address: ${address}`);
+          console.log(`Latitude: ${latitude}`);
+          console.log(`Longitude: ${longitude}`);
+        });
+
 
         // Get user's current location and set the map's center
         navigator.geolocation.getCurrentPosition(
