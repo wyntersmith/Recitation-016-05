@@ -23,23 +23,25 @@
           <p class="text-light" id="partyStartTime"></p>
           <button class="btn btn-dark" id="viewHostProfile" style="visibility: hidden;" >View Host Profile</button>
         </div> -->
-        <div style="padding: 24px; ">
-          <div class="jumbotron jumbotron-fluid" style="max-width: 23%; border-radius: 10px 100px / 120px; box-shadow: 0 10px 16px ; ">
-            <div class="container" style="padding-left: 120px;">
-              <h1 class="display-4">Find a party!</h1>
+        <div style="padding-left: 24px; padding-top: 24px; ">
+          <div class="jumbotron jumbotron-fluid" style="height: 25vh; max-width: 33%; border-radius: 10px 100px / 120px; box-shadow: 0 10px 16px ; ">
+            <div class="container" style="padding-left: 15%;">
+              <h1 class="display-4 display: flex;" style="padding-top: 0px;" >Find a party!</h1>
               <p class="lead">Click on a location to see the party detials.</p>
               </div>
             </div>
         </div>
 
-        <div style="padding: 2%;">
-          <div class="card text-white bg-dark border-dark mb-3" id="sidebar" style="width: 33rem; visibility: hidden;">
-              <img src="https://voyd-theta.s3.amazonaws.com/group_website/groups/bf634e52-dc41-4b3b-8101-efb69cd3ffa8/IMG_0016.JPG" class="card-img-top" id="partyImage" style="padding: 2%;" alt="party image">
-            <div class="card-body">
+        <div style="padding-left: 2%; padding-right: 2%; height: 56vh; display: flex;">
+          <div class="card text-white bg-dark border-dark mb-3" id="sidebar" style="width: 33%; visibility: hidden;">
+              <img src="https://voyd-theta.s3.amazonaws.com/group_website/groups/bf634e52-dc41-4b3b-8101-efb69cd3ffa8/IMG_0016.JPG" class="card-img-top" id="partyImage" style="padding: 2%; height: 40%; object-fit: cover;" alt="party image">
+            <div class="card-body" style="height: 30vh;">
               <h5 class="card-title" id="partyName"></h5>
               <p class="card-text" id="partyDescription"></p>
-              <p class="card-text" id="partyDate"></p>
-              <p class="card-text" id="partyStartTime"></p>
+              <div class="row">
+                <p class="card-text col" id="partyDate"></p>
+                <p class="card-text col" id="partyStartTime"></p>
+              </div>
               <button class="btn btn-secondary" id="viewHostProfile" style="visibility: hidden;">View Host</button>
             </div>
           </div>
@@ -75,7 +77,7 @@
       #map {
         position: absolute;
         top: 64px;
-        left: 25%;
+        left: 35%;
         right: 10px;
         bottom: 60px;
         z-index: 0;
