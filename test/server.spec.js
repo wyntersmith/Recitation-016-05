@@ -188,4 +188,22 @@ describe('Server test cases', () => {
       });
   });
 
+  // PARTY PAGE
+  // it('', done => {
+  //   chai
+  //   .request(server)
+  //   .post('')
+  //   .set('content-type', 'application/x-www-form-urlencoded')
+  //     .send({
+  //       host_user_id:
+  //       party_name:
+
+  //     })
+  //     .end((err, res) => {
+  //       expect(res).to.have.status(400)
+  //       done();
+  //     });
+
+  // })
+
 });
