@@ -47,7 +47,15 @@
                 <p class="card-text col" id="partyDate"></p>
                 <p class="card-text col" id="partyStartTime"></p>
               </div>
-              <button class="btn btn-secondary" id="viewHostProfile" style="visibility: hidden;">View Host</button>
+
+              <div class="text-center">
+                <button class="btn btn-secondary" id="viewHostProfile" style="width: 20vh; visibility: hidden;">View Host</button>
+              </div>
+
+              <div class="text-center">
+                <button class="btn btn-info" id="attendingButton" style="width: 20vh; margin-top: 2vh; visibility: hidden;">Attending!</button>
+              </div>
+
             </div>
           </div>
         </div>
@@ -156,6 +164,7 @@
         sidebar.style.visibility = 'visible';
 
         document.getElementById('viewHostProfile').style.visibility = 'visible';
+        document.getElementById('attendingButton').style.visibility = 'visible';
 
         // Add event listener for host profile button
         document.getElementById('viewHostProfile').onclick = () => {
@@ -165,7 +174,7 @@
 
       function showHostProfile(hostUserId) {
 
-
+        // TODO: Fetch host profile data from server
         const hostName = "Name Here";
         const partiesAttended = 5;
 
