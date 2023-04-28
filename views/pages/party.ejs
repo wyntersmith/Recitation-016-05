@@ -63,7 +63,7 @@
         <div id="hostProfilePopup" class="host-profile-popup">
           <div style="border-radius: 1rem;" class="host-profile-content">
             <h2 class="text-light" id="hostName"></h2>
-            <p class="text-light" id="partiesAttended"></p>
+            <p class="text-light" id="partiesHosted"></p>
             <button class="btn btn-dark" id="closeHostProfile">Close</button>
           </div>
         </div>
@@ -172,14 +172,32 @@
         };
       }
 
-      function showHostProfile(hostUserId) {
+      async function showHostProfile(hostUserId) {
 
-        // TODO: Fetch host profile data from server
-        const hostName = "Name Here";
-        const partiesAttended = 5;
+        let hostName =  'Name not found';
+        let partiesHosted = 'Data not found';
+        console.log(hostName, partiesHosted);
+
+        try {
+          console.log("trying")
+          const response = await fetch(`/get_profile/${hostUserId}`);
+          const user_data = await response.json();
+
+
+          console.log(user_data);
+          console.log(user_data["return_data"][0]["firstname"]);
+
+          hostName = user_data["return_data"][0]["firstname"] + " " + user_data["return_data"][0]["lastname"];
+          partiesHosted = user_data["return_data1"][0]["parties_hosted"];
+
+        } catch (error) {
+          console.error('Error fetching user info:', error);
+        }
+
+        console.log(hostName, partiesHosted);
 
         document.getElementById('hostName').innerText = hostName;
-        document.getElementById('partiesAttended').innerText = `Parties Attended: ${partiesAttended}`;
+        document.getElementById('partiesHosted').innerText = `Parties Hosted: ${partiesHosted}`;
 
         // Show host profile popup
         document.getElementById('hostProfilePopup').style.display = 'block';
