@@ -276,10 +276,17 @@ app.post("/add_party", (req, res) => {
   const party_name  = req.body.inputPartyName;
   const latitude = req.body.latitude;
   const longitude = req.body.longitude;
-  const party_date = req.body.party_date;
-  const start_time = req.body.start_time;
+  const party_address1 = req.body.address1;
+  const party_address2 = req.body.address2;
+  const party_city = req.body.inputCity;
+  const party_state = req.body.inputState;
+  const party_zip = req.body.inputZip;
+  const party_date = req.body.inputDate;
+  const start_time = req.body.inputTime;
   const party_description = req.body.inputDescription;
-  // const party_image = req.body.party_image;
+  const party_image = req.body.inputImageLink;
+
+
 
   console.log("Test", host_user_id, party_name, latitude, longitude, party_date, start_time, party_description); 
   db.any(query, [host_user_id, party_name, latitude, longitude, party_date, start_time, party_description])
