@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS party_info (
   latitude DECIMAL(9,6) NOT NULL,
   longitude DECIMAL(9,6) NOT NULL,
   party_address1 TEXT,
-  party_address2 TEXT.
+  party_address2 TEXT,
   city VARCHAR(255),
   party_state VARCHAR(255),
   zipcode BIGINT,
