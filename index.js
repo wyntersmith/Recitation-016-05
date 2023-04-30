@@ -116,13 +116,13 @@ app.post("/login", (req, res) => {
           res.redirect("/profile");
         }
         else {
-          res.status(403).render("pages/login", {denied: true});  //incorrect password
+          res.status(403).render("pages/login", {message: "Incorrect username or password"});  //incorrect password
         }
       }
     })
     .catch((err) => {
       if (err instanceof pgp.errors.QueryResultError && err.code == pgp.errors.queryResultErrorCode.noData) { //incorrect username
-        res.status(403).render("pages/login", {denied: true});
+        res.status(403).render("pages/login", {message: "Incorrect username or password"});
       }
       else {
         console.log(err);
@@ -165,10 +165,10 @@ app.post('/register', async (req, res) => {
     else {
       db.any(query, [req.body.username, req.body.email, req.body.firstName, req.body.lastName, hashedPassword])
       .then(function (data) {
-        res.redirect('/login');
+        res.status(400).render('pages/login', {message: "Successfully registered! Please Login"});
       })
       .catch(function (err) {
-        res.redirect('/register');
+        res.status(400).render('pages/register', {message: "Error adding user to database"});
       });
   
     }
@@ -287,7 +287,7 @@ app.post("/add_party", (req, res) => {
   const party_description = req.body.inputDescription;
   const party_image = req.body.inputImageLink;
 
-  console.log(host_user_id, party_name, party_address1, party_address2, party_city, party_state, party_zip, party_date, start_time, party_description, party_image);
+  //console.log(host_user_id, party_name, party_address1, party_address2, party_city, party_state, party_zip, party_date, start_time, party_description, party_image);
   db.any(query, [host_user_id, party_name, party_address1, party_address2, party_city, party_state, party_zip, party_date, start_time, party_description, party_image])
   .then(function (data) {
     res.render('pages/party', {message: "Succesfully added party"});

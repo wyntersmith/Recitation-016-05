@@ -22,11 +22,9 @@
                       <div class="mb-md-5 mt-md-4 pb-5">
 
                         <h2 class="display-3 font-weight-bold">Login</h2>
-                        <% if(locals.denied === true) { %>
-                          <h3> Incorrect Username or Password</h3>
-                          <% } %>
                         <p class="text-white-50 mb-5">Please enter username and password!</p>
-
+                        <%- include ('../partials/message') %>
+                        
                         <div class="form-outline form-white mb-4">
                           <input type="text" id="username" name="username" class="form-control form-control-lg" placeholder="Username" />
                         </div>
