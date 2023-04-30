@@ -274,8 +274,8 @@ app.post("/add_party", (req, res) => {
 
   const host_user_id = req.session.user.user_id;
   const party_name  = req.body.inputPartyName;
-  const latitude = req.body.latitude;
-  const longitude = req.body.longitude;
+  // const latitude = req.body.latitude;
+  // const longitude = req.body.longitude;
   const party_address1 = req.body.address1;
   const party_address2 = req.body.address2;
   const party_city = req.body.inputCity;
