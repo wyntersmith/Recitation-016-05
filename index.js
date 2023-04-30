@@ -269,9 +269,8 @@ app.get("/party", (req, res) => {
 });
 
 app.post("/add_party", (req, res) => {
-  //const query_check = "select * from party_info where party_name = $1 and host_user_id = $2;";
-  // const query = "insert into party_info (host_user_id, party_name, latitude, longitude, party_date, start_time, party_description) values ($1,$2,$3,$4,$5,$6,$7)";
-  const query = "insert into party_info (host_user_id, party_name, party_address1, party_address2, party_city, party_state, zipcode, party_date, start_time, party_description, party_image) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)"
+
+  const query = "insert into party_info (host_user_id, party_name, party_address1, party_address2, party_city, party_state, zipcode, party_date, start_time, party_description, party_image) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)";
 
   const host_user_id = req.session.user.user_id;
   const party_name  = req.body.inputPartyName;
@@ -286,6 +285,13 @@ app.post("/add_party", (req, res) => {
   const start_time = req.body.inputTime;
   const party_description = req.body.inputDescription;
   const party_image = req.body.inputImageLink;
+
+  if(host_user_id== '' || party_name == '' || party_address1  == '' || req.body.address2 == '' || req.body.inputCity == '' || req.body.inputState == '' || req.body.inputZip == '' || req.body.inputDate == '' || req.body.inputTime == '' || req.body.inputDescription == ''){
+    res.status(400).render("pages/add_party", {
+      message: "Please fill out all fields"
+    })
+    return;
+  }
 
   //console.log(host_user_id, party_name, party_address1, party_address2, party_city, party_state, party_zip, party_date, start_time, party_description, party_image);
   db.any(query, [host_user_id, party_name, party_address1, party_address2, party_city, party_state, party_zip, party_date, start_time, party_description, party_image])
