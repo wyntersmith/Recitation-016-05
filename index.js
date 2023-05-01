@@ -4,6 +4,18 @@
 
 const express = require('express'); // To build an application server or API
 const app = express();
+const path = require('path'); // To work with file and directory paths
+const multer = require('multer'); // To upload files
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'Images')
+  },
+  filename: (req, file, cb) => {
+    console.log(file);
+    cb(null, Date.now() + path.extname(file.originalname));
+  }
+});
+const upload = multer({storage: storage});
 const pgp = require('pg-promise')(); // To connect to the Postgres DB from the node server
 const bodyParser = require('body-parser');
 const session = require('express-session'); // To set the session object. To store or access session data, use the `req.session`, which is (generally) serialized as JSON by the store.
@@ -314,38 +326,12 @@ app.get("/logout", (req, res) => {
   res.render("pages/login");
 });
 
-const imgDiv = document.querySelector('.profile-pic-div');
-const img = document.querySelector('#photo');
-const file = document.querySelector('#file');
-const uploadBtn = document.querySelector('#uploadBtn');
-
-
-//if user hover on img div to change profile picture
-imgDiv.addEventListener('mouseenter', function()
-{
-  uploadBtn.style.display = "block";
+app.get("/profile", (req,res) => {
+  res.render("upload");
 });
-//if we hover out from img div to change profile picture
-imgDiv.addEventListener('mouseleave', function()
-{
-  uploadBtn.style.display = "none";
-});
-//lets work for image showing fucntionalitity when we choose an image to upload
 
-//when we choose a photo to upload
-file.addEventListener('change', function()
-{
-  //this refers to file
-  const choosedFile = this.files[0];
-
-  if (choosedFile){
-    const reader = new FileReader(); //FileReader is a predefined function of JS
-    reader.addEventListener('load', function()
-    {
-      img.setAttribute('src', reader.result);
-    });
-    reader.readAsDataURL(choosedFile);
-  }
+app.post("/profile", upload.single('image') ,(req,res) => {
+  res.send("Image Uploaded");
 });
 
 
