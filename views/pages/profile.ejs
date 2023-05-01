@@ -4,7 +4,10 @@
 <main style="background: #6a11cb;">
   <div class="container"> 
       <!-- THE REST OF YOUR HTML CODE GOES HERE -->
-  
+      <head>
+        <script async src="https://basicons.xyz/embed.js"> </script>
+      </head>
+      
       <section class="vh-100 gradient-custom">
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
@@ -12,11 +15,17 @@
               <div class="card bg-dark text-white mb-5" style="border-radius: 1rem;">
                 <div class="card-body p-5 text-center">
                   <div class="pb-5">
-                    <h2 class="fw-bold mb-2 text-uppercase">Profile</h2>
+                    <p style="font-size: xx-large; margin-bottom: 20px; color: white;">
+                      <%= username %>
+                    </p>
                     <link rel ="stylesheet" href="../../public/css/style.css"> 
                     <body>
-                      <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0o3w0mv-W0eBsD-rsoXshrs9jDdNEoLlLyQ&usqp=CAU" id="profile-pic"> 
-                    <label for = "input-file">update image</label>
+                    <img src = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" id="profile-pic"> 
+                    <label for = "input-file">Update Profile Picture
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 8l-5-5-5 5M12 4.2v10.3"/>
+                    </svg>
+                    </label>
                     <input type = "file" accept="image/jpeg, image/png, image/jpg" id="input-file">
                       
                       <script>
@@ -28,13 +37,10 @@
                       }
                       </script>
                     </body>
-                    <p class="text-white-50 mb-5" style="font-size: xx-large; margin-bottom: auto;">
-                      <%= username %>
-                    </p>
                     <table style="height: 250px; width: 100%;">
                       <tr>
                         <th style="text-align: left;">
-                          First Name
+                          First Name 
                         </th>
                         <td>
                           <%= firstName %>
@@ -50,7 +56,10 @@
                       </tr>
                       <tr>
                         <th style="text-align: left;">
-                          Email
+                          Email <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="3" y="5" width="18" height="14" rx="1" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></rect>
+                          <path d="M20 5.5L12 13L4 5.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                          </svg>
                         </th>
                         <td>
                           <%= email %>

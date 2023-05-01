@@ -22,14 +22,13 @@ header {
   width: 260px;
   height: 260px;
   border-radius: 50%;
-  margin-top: auto;
   background-size: cover;
-  margin-bottom: auto;
+  margin-bottom: 20px;
 }
 
 label{
   display: block;
-  width: 140px;
+  width: 55%;
   background: #6a11cb;
   color: #fff;
   padding: 12px;
