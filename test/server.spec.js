@@ -115,7 +115,15 @@ describe('Server test cases', () => {
     })
   });
 
-
+          // party_address1:
+          // party_address2:
+          // party_city:
+          // party_state:
+          // party_zipcode:
+          // party_date:
+          // start_time:
+          // party_description:
+          // party_image:
   // DISCOVER PAGE
   it('Tests if discover loads successfully', done => {
     chai
@@ -189,14 +197,23 @@ describe('Server test cases', () => {
   });
 
   // PARTY PAGE
-  // it('', done => {
+  // it('Test add_party with party not in database returns ', done => {
   //   chai
   //   .request(server)
   //   .post('')
   //   .set('content-type', 'application/x-www-form-urlencoded')
   //     .send({
-  //       host_user_id:
-  //       party_name:
+  //       host_user_id: testUser.user_id,
+  //       party_name: 'Sample Party'
+          // party_address1: ''
+          // party_address2: ''
+          // party_city: 'Boulder'
+          // party_state: 'Colorado'
+          // party_zipcode: ''
+          // party_date: ''
+          // start_time: ''
+          // party_description: 'Sample Description'
+          // party_image: 'https://pbs.twimg.com/profile_images/949787136030539782/LnRrYf6e_400x400.jpg'
 
   //     })
   //     .end((err, res) => {
