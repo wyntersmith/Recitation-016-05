@@ -30,4 +30,5 @@ To run the test cases, run the following command in the terminal:
 docker-compose run web npm run testandrun
 ```
 
-# Link
+# Deployment Link
+http://recitation-016-team-05.eastus.cloudapp.azure.com:3000/login
