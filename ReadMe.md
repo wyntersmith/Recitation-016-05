@@ -16,6 +16,23 @@ On the discover page, we would like to have a map representing all of the partie
 |Ali Almutawa Jr.   |PiCake314     |alal5051@colorado.edu     |
 
 # Technology Stack
+## Operating Systems and Programming Languages
+- Javascript
+
+## Servers
+- Microsoft Azure
+
+## Data Storage and Querying
+- PostgresSQL
+
+## Backend Framework
+
+
+## Frontend Framework
+- Bootstrap
+
+## API Services
+- Mapbox
 
 
 # Prerequisites
