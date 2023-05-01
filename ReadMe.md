@@ -25,6 +25,9 @@ On the discover page, we would like to have a map representing all of the partie
 
 
 # Running Tests
-
+To run the test cases, run the following command in the terminal:
+```
+docker-compose run web npm run testandrun
+```
 
 # Link
