@@ -5,7 +5,8 @@ CREATE TABLE IF NOT EXISTS users (
   lastName VARCHAR(100) NULL,
   username VARCHAR(50) NOT NULL,
   password VARCHAR(500) NOT NULL,
-  email VARCHAR(100) NULL
+  email VARCHAR(100) NULL,
+  profilePic TEXT
 );
 
 DROP TABLE IF EXISTS party_info CASCADE;
