@@ -30,6 +30,8 @@ On the discover page, we would like to have a map representing all of the partie
 
 ## Frontend Framework
 - Bootstrap
+- CSS
+- EJS
 
 ## API Services
 - Mapbox
