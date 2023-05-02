@@ -2,20 +2,25 @@
 // <!-- Section 1 : Import Dependencies -->
 // *****************************************************
 
-const express = require('express'); // To build an application server or API
+const path = require('path');
+const express = require('express');
+const multer  = require('multer');
 const app = express();
-const path = require('path'); // To work with file and directory paths
-const multer = require('multer'); // To upload files
+
+// Set up multer storage
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'Images')
+  destination: function (req, file, cb) {
+    cb(null, 'Images/');
   },
-  filename: (req, file, cb) => {
-    console.log(file);
-    cb(null, Date.now() + path.extname(file.originalname));
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
   }
 });
-const upload = multer({storage: storage});
+
+// Set up multer upload object
+const upload = multer({ storage: storage });
+
 const pgp = require('pg-promise')(); // To connect to the Postgres DB from the node server
 const bodyParser = require('body-parser');
 const session = require('express-session'); // To set the session object. To store or access session data, use the `req.session`, which is (generally) serialized as JSON by the store.
@@ -326,12 +331,14 @@ app.get("/logout", (req, res) => {
   res.render("pages/login");
 });
 
-app.get("/profile", (req,res) => {
-  res.render("upload");
+app.get('/profile', (req, res) => {
+  res.render('upload');
 });
 
-app.post("/profile", upload.single('image') ,(req,res) => {
-  res.send("Image Uploaded");
+// POST endpoint to handle uploaded image
+app.post('/profile', upload.single('image'), (req, res) => {
+  const imageLink = req.file ? '/Images/' + req.file.filename : null; // get the path of the uploaded file
+  res.send(imageLink); // send the image link as the response
 });
 
 
