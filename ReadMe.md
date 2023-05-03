@@ -16,6 +16,25 @@ On the discover page, we would like to have a map representing all of the partie
 |Ali Almutawa Jr.   |PiCake314     |alal5051@colorado.edu     |
 
 # Technology Stack
+## Operating Systems and Programming Languages
+- Javascript
+
+## Servers
+- Microsoft Azure
+
+## Data Storage and Querying
+- PostgresSQL
+
+## Backend Framework
+
+
+## Frontend Framework
+- Bootstrap
+- CSS
+- EJS
+
+## API Services
+- Mapbox
 
 
 # Prerequisites
@@ -25,6 +44,10 @@ On the discover page, we would like to have a map representing all of the partie
 
 
 # Running Tests
+To run the test cases, run the following command in the terminal:
+```
+docker-compose run web npm run testandrun
+```
 
-
-# Link
+# Deployment Link
+http://recitation-016-team-05.eastus.cloudapp.azure.com:3000/login

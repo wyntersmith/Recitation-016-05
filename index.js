@@ -116,13 +116,13 @@ app.post("/login", (req, res) => {
           res.redirect("/profile");
         }
         else {
-          res.status(403).render("pages/login", {denied: true});  //incorrect password
+          res.status(403).render("pages/login", {message: "Incorrect username or password", error: true});  //incorrect password
         }
       }
     })
     .catch((err) => {
       if (err instanceof pgp.errors.QueryResultError && err.code == pgp.errors.queryResultErrorCode.noData) { //incorrect username
-        res.status(403).render("pages/login", {denied: true});
+        res.status(403).render("pages/login", {message: "Incorrect username or password", error: true});
       }
       else {
         console.log(err);
@@ -160,15 +160,15 @@ app.post('/register', async (req, res) => {
   db.any(query1, [req.body.username, req.body.email])
   .then(function (data) {
     if (data.length) { 
-      res.status(400).render('pages/register', {message: "Username or Email already in use"});
+      res.status(400).render('pages/register', {message: "Username or Email already in use" , error: true});
     }
     else {
       db.any(query, [req.body.username, req.body.email, req.body.firstName, req.body.lastName, hashedPassword])
       .then(function (data) {
-        res.redirect('/login');
+        res.status(400).render('pages/login', {message: "Successfully registered! Please Login", error: false});
       })
       .catch(function (err) {
-        res.redirect('/register');
+        res.status(400).render('pages/register', {message: "Error adding user to database", error: true});
       });
   
     }
@@ -269,25 +269,35 @@ app.get("/party", (req, res) => {
 });
 
 app.post("/add_party", (req, res) => {
-  //const query_check = "select * from party_info where party_name = $1 and host_user_id = $2;";
-  const query = "insert into party_info (host_user_id, party_name, latitude, longitude, party_date, start_time, party_description) values ($1,$2,$3,$4,$5,$6,$7)";
+
+  const query = "insert into party_info (host_user_id, party_name, party_address1, party_address2, party_city, party_state, zipcode, party_date, start_time, party_description, party_image) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)";
 
   const host_user_id = req.session.user.user_id;
   const party_name  = req.body.inputPartyName;
-  const latitude = req.body.latitude;
-  const longitude = req.body.longitude;
-  const party_date = req.body.party_date;
-  const start_time = req.body.start_time;
+  // const latitude = req.body.latitude;
+  // const longitude = req.body.longitude;
+  const party_address1 = req.body.address1;
+  const party_address2 = req.body.address2;
+  const party_city = req.body.inputCity;
+  const party_state = req.body.inputState;
+  const party_zip = req.body.inputZip;
+  const party_date = req.body.inputDate;
+  const start_time = req.body.inputTime;
   const party_description = req.body.inputDescription;
-  // const party_image = req.body.party_image;
+  const party_image = req.body.inputImageLink;
 
-  console.log("Test", host_user_id, party_name, latitude, longitude, party_date, start_time, party_description); 
-  db.any(query, [host_user_id, party_name, latitude, longitude, party_date, start_time, party_description])
+  if(host_user_id== '' || party_name == '' || party_address1  == '' || req.body.address2 == '' || req.body.inputCity == '' || req.body.inputState == '' || req.body.inputZip == '' || req.body.inputDate == '' || req.body.inputTime == '' || req.body.inputDescription == ''){
+    res.status(400).render("pages/add_party", {message: "Please fill out all fields", error: true})
+    return;
+  }
+
+  //console.log(host_user_id, party_name, party_address1, party_address2, party_city, party_state, party_zip, party_date, start_time, party_description, party_image);
+  db.any(query, [host_user_id, party_name, party_address1, party_address2, party_city, party_state, party_zip, party_date, start_time, party_description, party_image])
   .then(function (data) {
-    res.render('pages/party', {message: "Succesfully added party"});
+    res.render('pages/party', {message: "Succesfully added party", error: false});
   })
   .catch(function (err) {
-    res.redirect('/add_party');
+    res.render('pages/add_party', {message: "Error adding party", error: true});
   });
   
 });
