@@ -270,14 +270,14 @@ app.get("/party", (req, res) => {
 
 app.post("/add_party", (req, res) => {
 
-  const query = "insert into party_info (host_user_id, party_name, party_address1, party_address2, party_city, party_state, zipcode, party_date, start_time, party_description, party_image) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)";
+  const query = "insert into party_info (host_user_id, party_name, latitude, longitude, party_address1, party_address2, party_city, party_state, party_zip, party_date, start_time, party_description, party_image) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13);";
 
   const host_user_id = req.session.user.user_id;
   const party_name  = req.body.inputPartyName;
-  // const latitude = req.body.latitude;
-  // const longitude = req.body.longitude;
-  const party_address1 = req.body.address1;
-  const party_address2 = req.body.address2;
+  const latitude = req.body.hiddenInputLatitude;
+  const longitude = req.body.hiddenInputLongitude;
+  const party_address1 = req.body.inputAddress1;
+  const party_address2 = req.body.inputAddress2;
   const party_city = req.body.inputCity;
   const party_state = req.body.inputState;
   const party_zip = req.body.inputZip;
@@ -291,8 +291,8 @@ app.post("/add_party", (req, res) => {
     return;
   }
 
-  //console.log(host_user_id, party_name, party_address1, party_address2, party_city, party_state, party_zip, party_date, start_time, party_description, party_image);
-  db.any(query, [host_user_id, party_name, party_address1, party_address2, party_city, party_state, party_zip, party_date, start_time, party_description, party_image])
+  console.log(host_user_id, party_name, latitude, longitude, party_address1, party_address2, party_city, party_state, party_zip, party_date, start_time, party_description, party_image);
+  db.any(query, [host_user_id, party_name, latitude, longitude, party_address1, party_address2, party_city, party_state, party_zip, party_date, start_time, party_description, party_image])
   .then(function (data) {
     res.render('pages/party', {message: "Succesfully added party", error: false});
   })
