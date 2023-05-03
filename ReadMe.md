@@ -26,7 +26,10 @@ On the discover page, we would like to have a map representing all of the partie
 - PostgresSQL
 
 ## Backend Framework
-
+- Node.js
+- Axios
+- Chai
+- Mocha
 
 ## Frontend Framework
 - Bootstrap
@@ -38,7 +41,7 @@ On the discover page, we would like to have a map representing all of the partie
 
 
 # Prerequisites
-
+- docker
 
 # Instructions on Running Application Locally
 
