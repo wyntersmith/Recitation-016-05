@@ -26,7 +26,10 @@ On the discover page, we would like to have a map representing all of the partie
 - PostgresSQL
 
 ## Backend Framework
-
+- Node.js
+- Axios
+- Chai
+- Mocha
 
 ## Frontend Framework
 - Bootstrap
@@ -38,10 +41,18 @@ On the discover page, we would like to have a map representing all of the partie
 
 
 # Prerequisites
-
+- docker
 
 # Instructions on Running Application Locally
-
+To run the the application locally, download and open the repository in your IDE. 
+In the terminal, run the command:
+```
+docker-compose up -d
+```
+To close the application, run the command:
+```
+docker compose down -v
+```
 
 # Running Tests
 To run the test cases, run the following command in the terminal:
