@@ -193,7 +193,7 @@
         
             // Listen for the 'result' event
             geocoder.on("result", function (event) {
-              const address = event.result.place_name;
+              const address = event.result.place_name.split(",")[0];;
               const city = event.result.context.find((c) => c.id.startsWith("place"));
               const state = event.result.context.find((c) => c.id.startsWith("region"));
               const zip = event.result.context.find((c) => c.id.startsWith("postcode"));
@@ -205,6 +205,7 @@
               document.getElementById("inputZip").value = zip ? zip.text : "";
               document.getElementById("hiddenInputLatitude").value = latitude;
               document.getElementById("hiddenInputLongitude").value = longitude;
+              document.getElementById("inputAddress1").value = address;
             });
           });
         </script>
