@@ -153,6 +153,10 @@
                               </div>
                             </div>
 
+                            <input type="hidden" id="hiddenInputLatitude" name="hiddenInputLatitude">
+                            <input type="hidden" id="hiddenInputLongitude" name="hiddenInputLongitude">
+
+
 
                         <div style="text-align: center; padding-top: 10px;">
                           <button type="submit" class="btn btn-primary">Let's Party!</button>
@@ -193,11 +197,14 @@
               const city = event.result.context.find((c) => c.id.startsWith("place"));
               const state = event.result.context.find((c) => c.id.startsWith("region"));
               const zip = event.result.context.find((c) => c.id.startsWith("postcode"));
+              const latitude = event.result.geometry.coordinates[1];
+              const longitude = event.result.geometry.coordinates[0];
         
               document.getElementById("inputCity").value = city ? city.text : "";
               document.getElementById("inputState").value = state ? state.short_code.split('-')[1] : ""; // Updated to get state acronym
               document.getElementById("inputZip").value = zip ? zip.text : "";
-              document.getElementById
+              document.getElementById("hiddenInputLatitude").value = latitude;
+              document.getElementById("hiddenInputLongitude").value = longitude;
             });
           });
         </script>
