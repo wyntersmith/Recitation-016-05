@@ -291,7 +291,7 @@ app.post("/add_party", (req, res) => {
     return;
   }
 
-  console.log(host_user_id, party_name, latitude, longitude, party_address1, party_address2, party_city, party_state, party_zip, party_date, start_time, party_description, party_image);
+  //console.log(host_user_id, party_name, latitude, longitude, party_address1, party_address2, party_city, party_state, party_zip, party_date, start_time, party_description, party_image);
   db.any(query, [host_user_id, party_name, latitude, longitude, party_address1, party_address2, party_city, party_state, party_zip, party_date, start_time, party_description, party_image])
   .then(function (data) {
     res.render('pages/party', {message: "Succesfully added party", error: false});
