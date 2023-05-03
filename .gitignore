@@ -106,3 +106,5 @@ dist
 .metals
 
 .vscode
+
+images/*.png

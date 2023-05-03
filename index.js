@@ -253,13 +253,21 @@ app.get('/profile', async (req, res) => {
     console.log(err);
     res.render('pages/error');
     return;
-
+    
   }
+  
+  if(req.session.user.profile_pic == null || req.session.user.profile_pic == '' || req.session.user.profile_pic == undefined){
+    req.session.user.profile_pic = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+  }
+  
+  console.log(req.session.user.profile_pic);
+
   res.render('pages/profile', {
     username: req.session.user.username,
     firstName: req.session.user.firstName,
     lastName: req.session.user.lastName,
     email: req.session.user.email,
+    profile_pic: req.session.user.profile_pic,
     parties_attended: parties_data.parties_attended,
     parties_hosted: parties_data.parties_hosted,
   });
@@ -338,10 +346,38 @@ app.get('/profile', (req, res) => {
 });
 
 // POST endpoint to handle uploaded image
-app.post('/profile', upload.single('image'), (req, res) => {
-  const imageLink = req.file ? '/Images/' + req.file.filename : null; // get the path of the uploaded file
-  res.send(imageLink); // send the image link as the response
+app.post('/uplaod_profile_pic', upload.single('image'), async(req, res) => {
+  console.log("IN");
+  const imageLink = req.file ? '../Images/' + req.file.filename : null; // get the path of the uploaded file
+
+  try{
+    if(imageLink){
+      console.log(`Image uploaded successfully to ${imageLink}`);
+
+      const user_id = req.session.user.user_id;
+      const query = `UPDATE users SET profile_pic = '${imageLink}' WHERE user_id = ${user_id}`;
+
+      req.session.user.profile_pic = imageLink;
+
+
+      await db.any(query)
+
+      console.log(req.session.user.profile_pic);
+
+      res.redirect('/profile');
+  
+    }
+    else{
+      res.redirect('/profile');
+    }
+  }
+  catch(err){
+    console.log(err);
+    res.status(500).render('pages/error');
+  }
+
 });
+
 
 
 // *****************************************************

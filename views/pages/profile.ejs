@@ -16,7 +16,7 @@
                 <div class="card-body p-5 text-center">
                   <div class="pb-5">
                     <body>
-                      <form method="POST" action="/profile" enctype="multipart/form-data" target="_blank">
+                      <form method="POST" action="/uplaod_profile_pic" enctype="multipart/form-data" target="_blank">
                         <input class="solo" type="file" name="image">
                         <input class="solo" type="submit" value="Upload">
                       </form>                                         
@@ -25,21 +25,22 @@
                     </p>
                     <link rel ="stylesheet" href="../../public/css/style.css"> 
                     <body>
-                    <img src = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" id="profile-pic"> 
+                    <img src = "<%= profile_pic %>"  id="profile-pic"> 
                     <label for = "input-file">Update Profile Picture
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 8l-5-5-5 5M12 4.2v10.3"/>
                     </svg>
                     </label>
                     <input type = "file" accept="image/jpeg, image/png, image/jpg" id="input-file">
-                      
+
                       <script>
                         let profilePic = document.getElementById("profile-pic");
                         let inputFile = document.getElementById("input-file");
   
                         inputFile.onchange = function(){
-                        profilePic.src = URL.createObjectURL(inputFile.files[0]);
-                      }
+                          profilePic.src = URL.createObjectURL(inputFile.files[0]);
+                        }
+
                       </script>
                     </body>
                     <table style="height: 250px; width: 100%;">
